@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {BrowserRouter, Route, Routes} from 'react-router-dom'
 
 function App() {
   return (
@@ -21,11 +21,11 @@ function App() {
       </header>
 
       <BrowserRouter>
-      <Switch>
+      <Routes>
         <Route path="/">
         {/* here, put the page for path "/" (default landing page) */}
         </Route>
-        </Switch> 
+        </Routes> 
       </BrowserRouter>
     </div>
   );
