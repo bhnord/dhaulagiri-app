@@ -7,9 +7,9 @@
 }
 
 #store_view, #site_reports {
-    display: inline-block;
     width: 45%;
-    height: 100%;
+    display: inline-block;
+    /* height: 100%; */
     border-width: 2px;
     border-style: solid;
 }
