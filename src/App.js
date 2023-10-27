@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
 function App() {
   return (
@@ -18,6 +19,14 @@ function App() {
           Learn React
         </a>
       </header>
+
+      <BrowserRouter>
+      <Switch>
+        <Route path="/">
+        {/* here, put the page for path "/" (default landing page) */}
+        </Route>
+        </Switch> 
+      </BrowserRouter>
     </div>
   );
 }
