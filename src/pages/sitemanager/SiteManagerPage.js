@@ -10,6 +10,8 @@ export default function SiteManagerPage() {
       <div className={styles.content}>
         <div id={styles.site_reports}>
             <Company />
+            <Company />
+            <Company />
         </div>
         <div id={styles.store_view}>
             <p>Total Inventory $ Amount: ${totalInventoryAmt}</p>

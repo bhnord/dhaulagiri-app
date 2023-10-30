@@ -6,21 +6,21 @@ export default function Company() {
   const computersInStock = 20;
 
   return (
-      <div id={styles.company}>
+    <div id={styles.company}>
+      <div id={styles.companySpecs}>
         <h2> {company_name} </h2>
         <div>
-          <div id={styles.companySpecs}>
-            <ul>
-              <li>Inventory: ${inventory}</li>
-              <li>Balance: ${balance}</li>
-              <li>Computers in Stock: {computersInStock}</li>
-            </ul>
-          </div>
-          <div id={styles.companyButtons}>
-            <button>Inventory Report</button>
-            <button>Delete Store</button>
-          </div>
+          <ul>
+            <li>Inventory: ${inventory}</li>
+            <li>Balance: ${balance}</li>
+            <li>Computers in Stock: {computersInStock}</li>
+          </ul>
         </div>
       </div>
+      <div id={styles.companyButtons}>
+        <button>Inventory Report</button>
+        <button>Delete Store</button>
+      </div>
+    </div>
   );
 }

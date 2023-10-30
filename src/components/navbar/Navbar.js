@@ -1,7 +1,8 @@
-import "./Navbar.module.css"
+import styles from "./Navbar.module.css"
+import Navbutton from "./Navbutton/Navbutton";
 export default function Navbar() {
-  return <div>
-    <a href="/">Home</a>
-    <a href="/sitemanager">Site Manager Home</a>
-  </div>;
+  return <div id={styles.navbar}>
+    <Navbutton text="Home" link="/"/>
+    <Navbutton text="Site Manager Home" link="/sitemanager"/>
+  </div>
 }

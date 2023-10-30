@@ -1,10 +1,11 @@
 
 #company{
     padding: 20px;
+    margin-bottom: 15px;
     border-style: solid;
     border-width: 1px;
     text-align: left;
-    display: block;
+    display: flex;
 }
 
 #companySpecs {
@@ -12,8 +13,10 @@
 }
 #companyButtons {
     width: 25%;
+    margin:auto;
 }
 
 button {
+    margin-bottom: 20px;
     padding: 4px;
 }
