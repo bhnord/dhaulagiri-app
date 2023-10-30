@@ -1,9 +1,9 @@
 import styles from "./Company.module.css";
-export default function Company() {
-  const company_name = "Company1";
-  const balance = 1000;
-  const inventory = 1000;
-  const computersInStock = 20;
+export default function Company({company_data}) {
+  const company_name = company_data.name;
+  const balance = company_data.balance;
+  const inventory = company_data.inventory;
+  const computersInStock = company_data.computersInStock;
 
   return (
     <div id={styles.company}>
