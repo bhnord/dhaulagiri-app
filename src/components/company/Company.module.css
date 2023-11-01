@@ -11,12 +11,14 @@
 #companySpecs {
     width: 75%;
 }
+
 #companyButtons {
     width: 25%;
     margin:auto;
 }
 
-button {
+.buttons {
+    margin-left: 30px;
     margin-bottom: 20px;
     padding: 4px;
 }

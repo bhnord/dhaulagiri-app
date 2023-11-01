@@ -16,7 +16,7 @@
     padding: 20px
 }
 
-.buttons {
-    margin-left: 10px;
-    margin-right: 10px;
+input{
+    margin: auto;
+    display: block;
 }
