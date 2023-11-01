@@ -7,7 +7,7 @@ export default function StoreManagerPage() {
 
   //will be returned from lambda
   const c_data = {
-    name: "Computer",
+    name: "Computer X",
     ram: 12,
     storage: 10,
     processor: "AMD",
@@ -32,7 +32,7 @@ export default function StoreManagerPage() {
           <p>Total Inventory $ Amount: ${totalInventory}</p>
           <button>Inventory Report</button>
           <div className="addComputer">
-            <h5>Add A Computer</h5>
+            <p>Add A Computer</p>
             <input type="text" placeholder="Name" />
             <input type="text" placeholder="Price" />
             <input type="text" placeholder="Memory" />
