@@ -19,7 +19,7 @@ export default function SiteManagerPage() {
   //load examples
   const companies = [];
   for (let i = 0; i < 3; i++) {
-    companies.push(<Company company_data={c_data} />);
+    companies.push(<Company key={i} company_data={c_data} />);
   }
 
   return (
