@@ -1,5 +1,4 @@
-
-#company{
+#computer{
     padding: 20px;
     margin-bottom: 15px;
     border-style: solid;
@@ -8,15 +7,18 @@
     display: flex;
 }
 
-#companySpecs {
+#computerSpecs {
     width: 75%;
 }
-#companyButtons {
+
+#computerButtons {
     width: 25%;
     margin:auto;
 }
 
-button {
+.buttons {
+    margin-left: 30px;
     margin-bottom: 20px;
     padding: 4px;
+    display: block;
 }

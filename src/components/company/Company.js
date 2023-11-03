@@ -18,8 +18,8 @@ export default function Company({company_data}) {
         </div>
       </div>
       <div id={styles.companyButtons}>
-        <button>Inventory Report</button>
-        <button>Delete Store</button>
+        <button className={styles.buttons}>Inventory Report</button>
+        <button className={styles.buttons}>Delete Store</button>
       </div>
     </div>
   );

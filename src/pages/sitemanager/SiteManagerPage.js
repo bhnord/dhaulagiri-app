@@ -1,5 +1,5 @@
 import styles from "./SiteManagerPage.module.css";
-import Company from "../../components/Company/Company";
+import Company from "../../components/company/Company";
 export default function SiteManagerPage() {
 
   //will be returned from lambda
@@ -32,8 +32,8 @@ export default function SiteManagerPage() {
           <p>Site Manager Balance: ${siteManagerBalance}</p>
           <p>Site Balance: ${siteBalance}</p>
           <p>Generate Site Reports:</p>
-          <button>Internal Profit Report</button>
-          <button>Total Inventory Report</button>
+          <button className={styles.buttons}>Internal Profit Report</button>
+          <button className={styles.buttons}>Total Inventory Report</button>
         </div>
       </div>
     </div>
