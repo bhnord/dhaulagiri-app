@@ -5,6 +5,7 @@ import SiteManagerPage from "./pages/sitemanager/SiteManagerPage";
 import HomePage from "./pages/HomePage";
 import Navbar from "./components/navbar/Navbar";
 import StoreManagerPage from "./pages/storemanager/StoreManagerPage";
+import CustomerPage from "./pages/customer/CustomerPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/sitemanager" element={<SiteManagerPage />} />
         <Route path="/storemanager" element={<StoreManagerPage />} />
+        <Route path="/customer" element={<CustomerPage />} />
       </Routes>
     </div>
   );
