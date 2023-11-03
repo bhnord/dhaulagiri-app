@@ -7,6 +7,8 @@ export default function Computer({computer_data}) {
     const processor_generation = computer_data.processor_generation
     const graphics = computer_data.graphics
     const price = computer_data.price
+    
+
 
   return (
     <div id={styles.computer}>
