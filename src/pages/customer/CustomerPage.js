@@ -1,39 +1,42 @@
 import styles from "./CustomerPage.module.css";
-import Computer from "../../components/computer/Computer";
+import Computer from "../../components/computer/CustomerComputer";
 
 export default function CustomerPage() {
 
   //will be returned from lambda
-  // const totalInventoryAmt = 10000;
-  // const siteManagerBalance = 43005;
-  // const siteBalance = 100000;
+  // const storeBalance = 10000;
+  // const totalInventory = 43005;
 
+  //will be returned from lambda
+  const c_data = {
+    name: "Computer X",
+    ram: 12,
+    storage: 10,
+    processor: "AMD",
+    processor_generation: 10,
+    graphics: "NVDIA",
+    price: 1000,
+  };
 
-  // //will be returned from lambda
-  // const c_data = {
-  //   name: "Company1",
-  //   balance: 1000,
-  //   inventory: 1000,
-  //   computersInStock: 43,
-  // };
-
-  // //load examples
-  // const companies = [];
-  // for (let i = 0; i < 3; i++) {
-  //   companies.push(<Company key={i} company_data={c_data} />);
-  // }
+  //load examples
+  const companies = [];
+  for (let i = 0; i < 3; i++) {
+    companies.push(<Computer key={i} computer_data={c_data} />);
+  }
 
   return (
     <div className={styles.wrapper}>
       <h3>Customer Page</h3>
       <div className={styles.content}>
-        {/* <div id={styles.site_reports}>{companies}</div> */}
-        <div id={styles.store_view}>
-
-          <input className="CheckBox" type="checkbox" id="4GB" name="RAM" value="4GB or less"></input>
-          <input className="CheckBox" type="checkbox" id="8GB" name="RAM" value="8GB"></input>
-          <input className="CheckBox" type="checkbox" id="16GB" name="RAM" value="16GB"></input>
-          <input className="CheckBox" type="checkbox" id="32GB" name="RAM" value="32GB or more"></input>
+        <div id={styles.filter_view}>
+          <form>
+            <div id={styles.checkbox_div}>
+              <label><input className="CheckBox" type="checkbox" id="4GB" name="RAM" value="4GB or less" />4GB or less</label>
+              <input className="CheckBox" type="checkbox" id="8GB" name="RAM" value="8GB"></input>
+              <input className="CheckBox" type="checkbox" id="16GB" name="RAM" value="16GB"></input>
+              <input className="CheckBox" type="checkbox" id="32GB" name="RAM" value="32GB or more"></input>
+            </div>
+          </form>
           <br></br>
 
           <input className="CheckBox" type="checkbox" id="256GB" name="Storage" value="256GB or less"></input>
@@ -56,7 +59,12 @@ export default function CustomerPage() {
           <input className="CheckBox" type="checkbox" id="1500" name="Price" value="$1001 to $1500"></input> 
           <input className="CheckBox" type="checkbox" id="2000" name="Price" value="$1501 to $2000"></input>
           <input className="CheckBox" type="checkbox" id="2500" name="Price" value="$2001 or more"></input> 
-            
+        </div>
+        <div id={styles.computer_view}>
+          {companies}
+        </div>
+        <div id={styles.compare_view}>
+
         </div>
       </div>
     </div>
