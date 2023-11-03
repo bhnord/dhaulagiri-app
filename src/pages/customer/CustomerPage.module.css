@@ -22,7 +22,8 @@
     min-height: 85vh; 
     border-width: 2px;
     border-style: solid;
-    padding: 20px
+    padding: 20px;
+    vertical-align: left;
 }
 #compare_view {
     width: 35%;

@@ -29,14 +29,11 @@ export default function CustomerPage() {
       <h3>Customer Page</h3>
       <div className={styles.content}>
         <div id={styles.filter_view}>
-          <form>
-            <div id={styles.checkbox_div}>
-              <label><input className="CheckBox" type="checkbox" id="4GB" name="RAM" value="4GB or less" />4GB or less</label>
-              <input className="CheckBox" type="checkbox" id="8GB" name="RAM" value="8GB"></input>
-              <input className="CheckBox" type="checkbox" id="16GB" name="RAM" value="16GB"></input>
-              <input className="CheckBox" type="checkbox" id="32GB" name="RAM" value="32GB or more"></input>
-            </div>
-          </form>
+          <h3>Filter</h3>
+          <label><input className="CheckBox" type="checkbox" id="4GB" name="RAM" value="4GB or less" />4GB or less</label>
+          <input className="CheckBox" type="checkbox" id="8GB" name="RAM" value="8GB"></input>
+          <input className="CheckBox" type="checkbox" id="16GB" name="RAM" value="16GB"></input>
+          <input className="CheckBox" type="checkbox" id="32GB" name="RAM" value="32GB or more"></input>
           <br></br>
 
           <input className="CheckBox" type="checkbox" id="256GB" name="Storage" value="256GB or less"></input>
@@ -64,7 +61,7 @@ export default function CustomerPage() {
           {companies}
         </div>
         <div id={styles.compare_view}>
-
+          <h3>Compare Computers</h3>
         </div>
       </div>
     </div>
