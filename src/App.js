@@ -5,12 +5,12 @@ import SiteManagerPage from "./pages/sitemanager/SiteManagerPage";
 import HomePage from "./pages/HomePage";
 import Navbar from "./components/navbar/Navbar";
 import StoreManagerPage from "./pages/storemanager/StoreManagerPage";
-import { generateStoreInventory } from "./api/api-client";
+import { api } from "./api/api-client";
 import CreateStorePage from "./pages/createstore/CreateStorePage";
 
 function App() {
 
-  console.log(generateStoreInventory("Sam Store"))
+  console.log(api.generateStoreInventory("Sam Store"))
 
   return (
     <div className="App">

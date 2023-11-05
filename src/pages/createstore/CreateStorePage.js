@@ -1,5 +1,5 @@
 import styles from './CreateStorePage.module.css'
-import { createStore } from '../../api/api-client'
+import { api } from '../../api/api-client'
 import { useNavigate } from 'react-router-dom'
 
 export default function CreateStorePage(){
@@ -17,7 +17,7 @@ export default function CreateStorePage(){
             return 
         }
 
-       let resp = await createStore(storeName,user,pass,long,lat) 
+       let resp = await api.createStore(storeName,user,pass,long,lat) 
        if(resp.statusCode != 200){
         alert("Store or User already Exists")
        } else {
