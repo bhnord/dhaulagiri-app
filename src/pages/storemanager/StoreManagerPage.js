@@ -62,6 +62,8 @@ export default function StoreManagerPage() {
                 computers.map((computer) => <Computer key={
                         computer.computerID
                     }
+                    refresh={refresh}
+                    setRefresh={setRefresh}
                     computer_data={computer}/>)
             } </div>
             <div id={
