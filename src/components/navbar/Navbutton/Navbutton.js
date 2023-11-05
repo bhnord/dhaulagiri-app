@@ -1,6 +1,9 @@
+import { useNavigate } from 'react-router-dom'
 import styles from './Navbutton.module.css'
+import { Link } from 'react-router-dom';
 export default function Navbutton({text, link}){
+    const navigate = useNavigate();
     return (
-        <a className={styles.link} href={link}>{text}</a>
+        <Link className={styles.link} to={link}>{text}</Link>
     )
 }

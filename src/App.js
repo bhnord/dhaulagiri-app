@@ -4,9 +4,9 @@ import { Route, Routes } from "react-router-dom";
 import SiteManagerPage from "./pages/sitemanager/SiteManagerPage";
 import HomePage from "./pages/HomePage";
 import Navbar from "./components/navbar/Navbar";
-import StoreManagerPage from "./pages/storemanager/StoreManagerPage";
-import { api } from "./api/api-client";
+import StoreOwnerPage from "./pages/storemanager/StoreOwnerPage";
 import CreateStorePage from "./pages/createstore/CreateStorePage";
+import LoginPage from "./pages/login/LoginPage";
 
 function App() {
 
@@ -18,8 +18,9 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/sitemanager" element={<SiteManagerPage />} />
-        <Route path="/storemanager" element={<StoreManagerPage />} />
+        <Route path="/storeowner" element={<StoreOwnerPage />} />
         <Route path="/createstore" element={<CreateStorePage />} />
+        <Route path="/login" element={<LoginPage />}/>
       </Routes>
     </div>
   );

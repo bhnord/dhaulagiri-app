@@ -1,11 +1,10 @@
 const aws_path = "https://pttmkhd20b.execute-api.us-east-2.amazonaws.com/Prod/";
 
-
 class Api { // TODO: remove this as hard-coded values
     constructor() {
-        this.username = 'sam';
-        this.password = 'samantha';
-        this.storeName = 'Sam Store'
+        this.username = "";
+        this.password = "";
+        this.storeName = "";
     }
     logout() {
         this.username = "";
@@ -16,9 +15,7 @@ class Api { // TODO: remove this as hard-coded values
         this.username = username;
         this.password = password;
         this.storeName = storeName;
-
         // TODO: add some kind of login checking through lambda
-
     }
 
     generateStoreInventory(storeName = this.storeName) {

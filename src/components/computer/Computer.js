@@ -1,4 +1,3 @@
-import {useEffect} from 'react'
 import styles from './Computer.module.css'
 export default function Computer({computer_data, refresh, setRefresh}) {
     const computerID = computer_data.computerID

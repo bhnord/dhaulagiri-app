@@ -1,8 +1,8 @@
-import styles from "./StoreManagerPage.module.css";
+import styles from "./StoreOwnerPage.module.css";
 import Computer from "../../components/computer/Computer";
 import {api} from "../../api/api-client";
 import {useEffect, useState} from "react";
-export default function StoreManagerPage() {
+export default function StoreOwnerPage() {
     const [computers, setComputers] = useState([]);
     const [inventory, setInventory] = useState(0);
     const [refresh, setRefresh] = useState(0);
@@ -16,6 +16,7 @@ export default function StoreManagerPage() {
     useEffect(() => {
         const getComputers = async () => {
             const resp = await api.generateStoreInventory();
+            console.log(resp)
             const computers = resp.computers;
             const inventory = resp.inventory
 
@@ -53,7 +54,7 @@ export default function StoreManagerPage() {
     return (<div className={
         styles.wrapper
     }>
-        <h3>StoreManagerPage</h3>
+        <h3>StoreOwnerPage</h3>
         <div className={
             styles.content
         }>
