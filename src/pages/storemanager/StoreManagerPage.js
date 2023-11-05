@@ -29,7 +29,6 @@ export default function StoreManagerPage() {
             const computers = resp.computers;
             const inventory = resp.inventory
 
-            console.log(resp)
             if (resp.statusCode !== 200) {
                 alert("invalid login")
 
