@@ -1,9 +1,7 @@
 const aws_path = "https://pttmkhd20b.execute-api.us-east-2.amazonaws.com/Prod/";
 
 
-class Api {
-
-// TODO: remove this as hard-coded values
+class Api { // TODO: remove this as hard-coded values
     constructor() {
         this.username = 'sam';
         this.password = 'samantha';
@@ -15,14 +13,14 @@ class Api {
         this.storeName = "";
     }
     login(username, password, storeName) {
-      this.username=username;
-      this.password=password;
-      this.storeName=storeName;
+        this.username = username;
+        this.password = password;
+        this.storeName = storeName;
 
-      //TODO: add some kind of login checking through lambda
+        // TODO: add some kind of login checking through lambda
 
     }
-    
+
     generateStoreInventory(storeName = this.storeName) {
         const endpoint = "generate-store-inventory";
         const requestOptions = {
@@ -38,7 +36,7 @@ class Api {
         return fetch(aws_path + endpoint, requestOptions).then((response) => response.json());
     }
 
-    //TODO: sitename -> storename
+    // TODO: sitename -> storename
     removeStore(storeName) {
         const endpoint = "remove-store";
         const requestOptions = {
@@ -68,6 +66,35 @@ class Api {
                     password: password,
                     longitude: longitude,
                     latitude: latitude
+                }
+            )
+        };
+
+        return fetch(aws_path + endpoint, requestOptions).then((response) => response.json());
+    }
+
+    addComputer(computerName, ram, storage, processor, processGen, graphics, price) {
+        const endpoint = "create-computer";
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(
+                {
+                    username: this.username,
+                    password: this.password,
+                    storeName: this.storeName,
+
+                    computerName: computerName,
+                    ram: ram,
+                    storage: storage,
+                    processor: processor,
+                    processGen: processGen,
+                    graphics: graphics,
+                    price: price
+
+
                 }
             )
         };

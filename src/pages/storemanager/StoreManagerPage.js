@@ -8,20 +8,10 @@ export default function StoreManagerPage() {
     const [refresh, setRefresh] = useState(0);
 
 
+    //XXX: UPDATE LAMBDA
     // will be returned from lambda
     const storeBalance = 10000;
     const totalInventory = 43005;
-
-    // will be returned from lambda
-    const c_data = {
-        name: "Computer X",
-        ram: 12,
-        storage: 10,
-        processor: "AMD",
-        processor_generation: 10,
-        graphics: "NVDIA",
-        price: 1000
-    };
 
     useEffect(() => {
         const getComputers = async () => {
@@ -40,13 +30,25 @@ export default function StoreManagerPage() {
         getComputers();
     }, [refresh])
 
+    const addComputer = async() => {
+      const name = document.getElementById("name").value
+      const price = document.getElementById("price").value
+      const ram = document.getElementById("ram").value
+      const storage = document.getElementById("storage").value
+      const processor = document.getElementById("processor").value
+      const processorGen = document.getElementById("processorGen").value
+      const graphics = document.getElementById("graphics").value
 
-    // // load examples
-    // const companies = [];
-    // for (let i = 0; i < 3; i++) {
-    //     companies.push (<Computer key={i}
-    //         computer_data={c_data}/>);
-    // }
+      const resp = await api.addComputer(name, ram, storage, processor, processorGen, graphics, price);
+      if (resp.statusCode !== 200){
+        console.log(name)
+        console.log(resp)
+        alert("Invalid Input");
+      } else {
+        setRefresh(refresh+1);
+      }
+
+    }
 
     return (<div className={
         styles.wrapper
@@ -73,14 +75,14 @@ export default function StoreManagerPage() {
                 <button>Inventory Report</button>
                 <div className="addComputer">
                     <p>Add A Computer</p>
-                    <input type="text" placeholder="Name"/>
-                    <input type="text" placeholder="Price"/>
-                    <input type="text" placeholder="Memory"/>
-                    <input type="text" placeholder="Storage"/>
-                    <input type="text" placeholder="Processor"/>
-                    <input type="text" placeholder="Processor Generation"/>
-                    <input type="text" placeholder="Graphics"/>
-                    <button>Add Computer</button>
+                    <input id="name" type="text" placeholder="Name"/>
+                    <input id="price" type="number" placeholder="Price"/>
+                    <input id="ram" type="number" placeholder="RAM (GB)"/>
+                    <input id="storage" type="number" placeholder="Storage (GB)"/>
+                    <input id="processor" type="text" placeholder="Processor"/>
+                    <input id="processorGen" type="text" placeholder="Processor Generation"/>
+                    <input id="graphics" type="text" placeholder="Graphics"/>
+                    <button onClick={addComputer}>Add Computer</button>
                 </div>
             </div>
         </div>
