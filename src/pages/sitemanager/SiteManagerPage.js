@@ -1,5 +1,5 @@
 import styles from "./SiteManagerPage.module.css";
-import Company from "../../components/company/Company";
+import Store from "../../components/store/Store";
 export default function SiteManagerPage() {
 
   //will be returned from lambda
@@ -10,7 +10,7 @@ export default function SiteManagerPage() {
 
   //will be returned from lambda
   const c_data = {
-    name: "Company1",
+    name: "Store1",
     balance: 1000,
     inventory: 1000,
     computersInStock: 43,
@@ -19,7 +19,7 @@ export default function SiteManagerPage() {
   //load examples
   const companies = [];
   for (let i = 0; i < 3; i++) {
-    companies.push(<Company key={i} company_data={c_data} />);
+    companies.push(<Store key={i} company_data={c_data} />);
   }
 
   return (
