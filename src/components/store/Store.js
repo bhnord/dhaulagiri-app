@@ -1,5 +1,5 @@
-import styles from "./Company.module.css";
-export default function Company({company_data}) {
+import styles from "./Store.module.css";
+export default function Store({company_data}) {
   const company_name = company_data.name;
   const balance = company_data.balance;
   const inventory = company_data.inventory;
