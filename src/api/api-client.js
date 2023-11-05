@@ -30,3 +30,18 @@ export function removeStore(storeName) {
     response.json()
   );
 }
+
+export function createStore(storeName, username, password, longitude, latitude) {
+  const endpoint = "create-store";
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ storeName: storeName, username:username, password:password,longitude:longitude,latitude:latitude }),
+  };
+
+  return fetch(aws_path + endpoint, requestOptions).then((response) =>
+    response.json()
+  );
+}
+
+
