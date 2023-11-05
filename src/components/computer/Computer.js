@@ -1,14 +1,15 @@
+import { useEffect } from 'react'
 import styles from './Computer.module.css'
 export default function Computer({computer_data}) {
-    const name = computer_data.name
+    const computerID = computer_data.computerID
+    const name = computer_data.computerName
     const ram = computer_data.ram
     const storage = computer_data.storage
     const processor = computer_data.processor
-    const processor_generation = computer_data.processor_generation
+    const processor_generation = computer_data.processGen
     const graphics = computer_data.graphics
     const price = computer_data.price
     
-
 
   return (
     <div id={styles.computer}>

@@ -18,7 +18,7 @@ export default function CreateStorePage(){
         }
 
        let resp = await api.createStore(storeName,user,pass,long,lat) 
-       if(resp.statusCode != 200){
+       if(resp.statusCode !== 200){
         alert("Store or User already Exists")
        } else {
         alert("Store Created.")

@@ -22,7 +22,8 @@ class Api {
       //TODO: add some kind of login checking through lambda
 
     }
-    generateStoreInventory(storeName) {
+    
+    generateStoreInventory(storeName = this.storeName) {
         const endpoint = "generate-store-inventory";
         const requestOptions = {
             method: "POST",
