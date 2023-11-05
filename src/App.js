@@ -10,7 +10,7 @@ import CreateStorePage from "./pages/createstore/CreateStorePage";
 
 function App() {
 
-  console.log(api.generateStoreInventory("Sam Store"))
+  // console.log(api.generateStoreInventory("Sam Store"))
 
   return (
     <div className="App">
