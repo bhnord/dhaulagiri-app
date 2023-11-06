@@ -23,6 +23,13 @@ export default function CustomerComputer({computer_data}) {
           </ul>
         </div>
       </div>
+      <div>
+        <form>
+          <div id={styles.computerRadio}>
+            <label><input className="Radio" type="radio" id="AllIntel" name="ProcessorType" value="All Intel"></input>Compare</label>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

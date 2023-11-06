@@ -8,8 +8,8 @@ export default function Navbar() {
     <Navbutton text="Login" link="/login"/>
     <Navbutton text="Home" link="/"/>
     <Navbutton text="Site Manager Home" link="/sitemanager"/>
-    <Navbutton text="Customer Home" link="/customer"/>
     <Navbutton text="Store Owner Home" link="/storeowner"/>
+    <Navbutton text="Customer Home" link="/customer"/>
     <Navbutton text="Create Store" link="/createstore"/>
     
   </div>

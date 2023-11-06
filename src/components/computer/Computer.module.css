@@ -16,6 +16,12 @@
     margin:auto;
 }
 
+#computerRadio {
+    width: 25%;
+    margin:auto;
+    display: block;
+}
+
 .buttons {
     margin-left: 30px;
     margin-bottom: 20px;

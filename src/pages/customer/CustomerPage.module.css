@@ -31,10 +31,26 @@
     min-height: 85vh; 
     border-width: 2px;
     border-style: solid;
+    /* padding: 20px */
+}
+
+#compare_div{
+    display: flex;
+}
+
+#computer_compare {
+    width: 50%;
+    /* display: inline-block; */
+    min-height: 85vh; 
+    border-width: 2px;
+    border-style: solid;
     padding: 20px
 }
+
+
 #checkbox_div {
     display: inline-block; 
+    vertical-align: left;
 }
 
 p {
