@@ -2,9 +2,7 @@ export default function HomePage() {
   return (
     <div>
       <h3> Home Page</h3>
-      <a href="/sitemanager" rel="noopener noreferrer">
-        Click to switch pages to "/sitemanager"
-      </a>
+      <h5>use the navbar to navigate to different landing pages</h5>
     </div>
   );
 }
