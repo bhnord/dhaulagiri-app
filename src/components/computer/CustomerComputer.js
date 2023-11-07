@@ -26,7 +26,7 @@ export default function CustomerComputer({computer_data}) {
       <div>
         <form>
           <div id={styles.computerRadio}>
-            <label><input className="Radio" type="radio" id="AllIntel" name="ProcessorType" value="All Intel"></input>Compare</label>
+            <label><input className="Radio" type="radio" id="Compare" name="Compare" value="Compare"></input>Compare</label>
           </div>
         </form>
       </div>
