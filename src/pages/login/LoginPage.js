@@ -3,6 +3,9 @@ import {api} from "../../api/api-client";
 import styles from "./LoginPage.module.css";
 import { Link } from 'react-router-dom';
 
+import styles from "./LoginPage.module.css";
+import { Link } from 'react-router-dom';
+
 export default function LoginPage() {
     const {setUser, user} = useAuth();
     const loginStoreOwner = () => {
@@ -22,7 +25,7 @@ export default function LoginPage() {
         Array.from(document.getElementsByTagName("input")).forEach(e=>{e.value=""});
     }
 
-    return (<div class={styles.container}>
+    return (<div className={styles.container}>
         <button id={styles.topLeftLoginButton}>Login</button>
         <Link to="/createstore">
         <button id={styles.topRightLoginButton}>Create Store</button>
