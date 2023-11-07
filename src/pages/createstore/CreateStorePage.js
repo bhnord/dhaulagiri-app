@@ -1,6 +1,7 @@
 import styles from './CreateStorePage.module.css'
 import {api} from '../../api/api-client'
 import {useNavigate} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 export default function CreateStorePage() {
     const navigate = useNavigate();
@@ -26,49 +27,20 @@ export default function CreateStorePage() {
         }
     }
 
-    return (<div>
+    return (<div class={styles.container}>
+        <Link to="/login">
+        <button id={styles.topLeftLoginButton}>Login</button>
+        </Link>
+        <button id={styles.topRightLoginButton}>Create Store</button>
 
         <p>Create Store</p>
-        <input id="usr"
-            className={
-                styles.inputStyle
-            }
-            type="text"
-            placeholder="Enter your username"/>
-        <input id="pass"
-            className={
-                styles.inputStyle
-            }
-            type="password"
-            placeholder="Enter your password"/>
-        <input id="pass2"
-            className={
-                styles.inputStyle
-            }
-            type="password"
-            placeholder="Re-enter your password"/>
-        <input id="storeName"
-            className={
-                styles.inputStyle
-            }
-            type="text"
-            placeholder="Enter your store name"/>
-        <input id="lat"
-            className={
-                styles.inputStyle
-            }
-            type="number"
-            placeholder="Enter your latitude"/>
-        <input id="long"
-            className={
-                styles.inputStyle
-            }
-            type="number"
-            placeholder="Enter your longitude"/>
-        <button id={
-                styles.createButton
-            }
-            onClick={createStoreButton}>Create Store</button>
+        <input id="usr" className={styles.inputBoxes} type="text" placeholder="Enter your username"/>
+        <input id="pass" className={styles.inputBoxes} type="password" placeholder="Enter your password"/>
+        <input id="pass2" className={styles.inputBoxes} type="password" placeholder="Re-enter your password"/>
+        <input id="storeName" className={styles.inputBoxes} type="text" placeholder="Enter your store name"/>
+        <input id="lat" className={styles.inputBoxes} type="number" placeholder="Enter your latitude"/>
+        <input id="long" className={styles.inputBoxes} type="number" placeholder="Enter your longitude"/>
+        <button id={styles.createstorebutton} onClick={createStoreButton}>Create Store</button>
     </div>)
 
 }
