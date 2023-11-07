@@ -22,21 +22,15 @@ export default function LoginPage() {
         Array.from(document.getElementsByTagName("input")).forEach(e=>{e.value=""});
     }
 
-    const logout = () => {
-        setUser(null)
-        Array.from(document.getElementsByTagName("input")).forEach(e=>{e.value=""});
-    }
-
     return (<div class={styles.container}>
-        <button id={styles.topLeftLoginButton} onClick={login}>Login</button>
+        <button id={styles.topLeftLoginButton}>Login</button>
         <Link to="/createstore">
         <button id={styles.topRightLoginButton}>Create Store</button>
         </Link>        
-        <input id={styles.username} className="inputField" type="text" placeholder="Enter Username" />
-        <input id={styles.password} className="inputField" type="password" placeholder="Enter Password"/>
-        <input id={styles.storeName} className="inputField" type="text" placeholder="Enter Store Name"/>
+        <input id="username" className={styles.inputBoxes} type="text" placeholder="Enter Username" />
+        <input id="password" className={styles.inputBoxes} type="password" placeholder="Enter Password"/>
+        <input id="storeName" className={styles.inputBoxes} type="text" placeholder="Enter Store Name"/>
         <button id={styles.loginbutton} onClick={login}>Login</button>
-        <button onClick={logout}>Logout</button>
         <div style={{marginTop: 20}}>
             Dev Tools: <br/>
             <button onClick={loginStoreOwner}>Login Store Owner [Dev]</button>
