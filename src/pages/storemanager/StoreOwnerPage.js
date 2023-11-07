@@ -10,14 +10,14 @@ export default function StoreOwnerPage() {
 
     // XXX: UPDATE LAMBDA
     // will be returned from lambda
-    const storeBalance = 10000;
-    const totalInventory = 43005;
+    const storeBalance = null;
 
     useEffect(() => {
         const getComputers = async () => {
             const resp = await api.generateStoreInventory();
             const computers = resp.computers;
-            const inventory = resp.inventory
+            const inventory = resp.inventory.toFixed(2);
+            console.log(inventory)
 
             if (resp.statusCode !== 200) {
                 alert("invalid login")
@@ -71,7 +71,7 @@ export default function StoreOwnerPage() {
                 styles.store_view
             }>
                 <p>Total Store Balance: ${storeBalance}</p>
-                <p>Total Inventory $ Amount: ${totalInventory}</p>
+                <p>Total Inventory $ Amount: ${inventory}</p>
                 <button>Inventory Report</button>
                 <div className="addComputer">
                     <p>Add A Computer</p>
