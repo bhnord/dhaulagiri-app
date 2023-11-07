@@ -9,7 +9,7 @@ export default function Navbar() {
     <Navbutton text="Home" link="/"/>
     <Navbutton text="Site Manager Home" link="/sitemanager"/>
     <Navbutton text="Store Owner Home" link="/storeowner"/>
+    <Navbutton text="Customer Home" link="/customer"/>
     <Navbutton text="Create Store" link="/createstore"/>
-    
   </div>
 }
