@@ -42,7 +42,7 @@ label {
     display: flex;
     align-items:first baseline;
     flex-direction: column; /* Stacking elements vertically */
-  }
+}
 
   #computer_compare {
     width: 50%;
