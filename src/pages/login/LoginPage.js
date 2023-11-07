@@ -22,7 +22,7 @@ export default function LoginPage() {
         Array.from(document.getElementsByTagName("input")).forEach(e=>{e.value=""});
     }
 
-    return (<div class={styles.container}>
+    return (<div className={styles.container}>
         <button id={styles.topLeftLoginButton}>Login</button>
         <Link to="/createstore">
         <button id={styles.topRightLoginButton}>Create Store</button>

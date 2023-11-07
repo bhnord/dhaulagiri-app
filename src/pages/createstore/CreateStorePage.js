@@ -27,7 +27,7 @@ export default function CreateStorePage() {
         }
     }
 
-    return (<div class={styles.container}>
+    return (<div className={styles.container}>
         <Link to="/login">
         <button id={styles.topLeftLoginButton}>Login</button>
         </Link>

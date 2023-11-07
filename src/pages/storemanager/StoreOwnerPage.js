@@ -40,9 +40,7 @@ export default function StoreOwnerPage() {
 
         const resp = await api.addComputer(name, ram, storage, processor, processorGen, graphics, price);
         if (resp.statusCode !== 200) {
-            console.log(name)
-            console.log(resp)
-            alert("Invalid Input");
+            alert("Invalid Input or User");
         } else {
             setRefresh(refresh + 1);
         }
