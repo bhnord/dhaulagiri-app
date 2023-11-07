@@ -1,5 +1,5 @@
 import {createContext, useContext, useEffect, useState} from "react";
-import { api } from "../api/api-client";
+import {api} from "../api/api-client";
 const AuthContext = createContext({
     auth: null,
     user: null,
@@ -27,11 +27,8 @@ export default function AuthProvider({children}) {
         isAuth();
     }, [user])
 
-    return (
-        <AuthContext.Provider value={
-            {auth, setUser, user}
-        }>
-            {children} </AuthContext.Provider>
-    )
+    return (<AuthContext.Provider value={
+        {auth, setUser, user}
+    }> {children} </AuthContext.Provider>)
 
 }

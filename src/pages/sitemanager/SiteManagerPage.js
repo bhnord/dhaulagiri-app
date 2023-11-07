@@ -1,13 +1,36 @@
 import styles from "./SiteManagerPage.module.css";
 import Store from "../../components/store/Store";
+import { api } from "../../api/api-client";
+import { useEffect, useState } from "react";
 export default function SiteManagerPage() {
 
+  const [stores, setStores] = useState([]);
+  const [totalInventory, setTotalInventory] = useState(0);
+  const [refresh, setRefresh] = useState(0);
+
   //will be returned from lambda
-  const totalInventoryAmt = 10000;
-  const siteManagerBalance = 43005;
-  const siteBalance = 100000;
+  const totalInventoryAmt = null;
+  const siteManagerBalance = null;
+  const siteBalance = null;
 
+  useEffect(() => {
+    const getStores = async() => {
+      const resp = await api.listStores();
+      const respInventory = await api.generateTotalInventory();
+      if(resp.statusCode !== 200 || respInventory.statusCode !== 200){
+        alert("invalid login")
+      } else {
+        setStores(resp.stores)
 
+        let total = 0;
+        for (let store in respInventory?.stores){
+          total+=respInventory.stores[store].inventory;
+        }
+        setTotalInventory(total?.toFixed(2));
+      }
+    }
+    getStores();
+  }, [refresh]);
   //will be returned from lambda
   const c_data = {
     name: "Store1",
@@ -17,18 +40,16 @@ export default function SiteManagerPage() {
   };
 
   //load examples
-  const companies = [];
-  for (let i = 0; i < 3; i++) {
-    companies.push(<Store key={i} company_data={c_data} />);
-  }
 
   return (
     <div className={styles.wrapper}>
       <h3>SiteManagerPage</h3>
       <div className={styles.content}>
-        <div id={styles.site_reports}>{companies}</div>
+        <div id={styles.site_reports}>{stores.map((x) => 
+          <Store key={x.storeName} store_data={x} refresh={refresh} setRefresh={setRefresh}/>
+        )}</div>
         <div id={styles.store_view}>
-          <p>Total Inventory $ Amount: ${totalInventoryAmt}</p>
+          <p>Total Inventory $ Amount: ${totalInventory}</p>
           <p>Site Manager Balance: ${siteManagerBalance}</p>
           <p>Site Balance: ${siteBalance}</p>
           <p>Generate Site Reports:</p>

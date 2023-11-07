@@ -4,21 +4,19 @@ import {api} from "../../api/api-client";
 import {useEffect, useState} from "react";
 export default function StoreOwnerPage() {
     const [computers, setComputers] = useState([]);
-    const [inventory, setInventory] = useState(0);
+    const [inventory, setInventory] = useState(null);
     const [refresh, setRefresh] = useState(0);
 
 
-    //XXX: UPDATE LAMBDA
+    // XXX: UPDATE LAMBDA
     // will be returned from lambda
-    const storeBalance = 10000;
-    const totalInventory = 43005;
+    const storeBalance = null;
 
     useEffect(() => {
         const getComputers = async () => {
             const resp = await api.generateStoreInventory();
-            console.log(resp)
             const computers = resp.computers;
-            const inventory = resp.inventory
+            const inventory = resp ?. inventory ?. toFixed(2);
 
             if (resp.statusCode !== 200) {
                 alert("invalid login")
@@ -31,23 +29,23 @@ export default function StoreOwnerPage() {
         getComputers();
     }, [refresh])
 
-    const addComputer = async() => {
-      const name = document.getElementById("name").value
-      const price = document.getElementById("price").value
-      const ram = document.getElementById("ram").value
-      const storage = document.getElementById("storage").value
-      const processor = document.getElementById("processor").value
-      const processorGen = document.getElementById("processorGen").value
-      const graphics = document.getElementById("graphics").value
+    const addComputer = async () => {
+        const name = document.getElementById("name").value
+        const price = document.getElementById("price").value
+        const ram = document.getElementById("ram").value
+        const storage = document.getElementById("storage").value
+        const processor = document.getElementById("processor").value
+        const processorGen = document.getElementById("processorGen").value
+        const graphics = document.getElementById("graphics").value
 
-      const resp = await api.addComputer(name, ram, storage, processor, processorGen, graphics, price);
-      if (resp.statusCode !== 200){
-        console.log(name)
-        console.log(resp)
-        alert("Invalid Input");
-      } else {
-        setRefresh(refresh+1);
-      }
+        const resp = await api.addComputer(name, ram, storage, processor, processorGen, graphics, price);
+        if (resp.statusCode !== 200) {
+            console.log(name)
+            console.log(resp)
+            alert("Invalid Input");
+        } else {
+            setRefresh(refresh + 1);
+        }
 
     }
 
@@ -72,7 +70,7 @@ export default function StoreOwnerPage() {
                 styles.store_view
             }>
                 <p>Total Store Balance: ${storeBalance}</p>
-                <p>Total Inventory $ Amount: ${totalInventory}</p>
+                <p>Total Inventory $ Amount: ${inventory}</p>
                 <button>Inventory Report</button>
                 <div className="addComputer">
                     <p>Add A Computer</p>

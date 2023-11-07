@@ -2,16 +2,15 @@ const aws_path = "https://pttmkhd20b.execute-api.us-east-2.amazonaws.com/Prod/";
 
 class Api { // TODO: remove this as hard-coded values
     constructor() {
-        this.username = "";
-        this.password = "";
-        this.storeName = "";
+        this.logout();
     }
     logout() {
-        this.username = "";
-        this.password = "";
-        this.storeName = "";
+        this.username = null;
+        this.password = null;
+        this.storeName = null;
     }
     login(username, password, storeName) {
+        this.logout();
         this.username = username;
         this.password = password;
         this.storeName = storeName;
@@ -82,15 +81,15 @@ class Api { // TODO: remove this as hard-coded values
                     username: this.username,
                     password: this.password,
                     storeName: this.storeName,
-
-                    computerName: computerName,
-                    ram: ram,
-                    storage: storage,
-                    processor: processor,
-                    processGen: processGen,
-                    graphics: graphics,
-                    price: price
-
+                    computer: {
+                        computerName: computerName,
+                        ram: ram,
+                        storage: storage,
+                        processor: processor,
+                        processGen: processGen,
+                        graphics: graphics,
+                        price: price
+                    }
 
                 }
             )
@@ -99,7 +98,36 @@ class Api { // TODO: remove this as hard-coded values
         return fetch(aws_path + endpoint, requestOptions).then((response) => response.json());
     }
 
+    listStores() {
+        const endpoint = "list-stores";
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        };
 
+        return fetch(aws_path + endpoint, requestOptions).then((response) => response.json());
+
+    }
+
+    generateTotalInventory() {
+        const endpoint = "generate-total-inventory";
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                siteName: this.storeName,
+                username: this.username,
+                password: this.password
+            })
+        };
+
+        return fetch(aws_path + endpoint, requestOptions).then((response) => response.json());
+
+    }
 }
 
 export let api = new Api();

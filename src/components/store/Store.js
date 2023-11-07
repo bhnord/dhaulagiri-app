@@ -1,14 +1,25 @@
 import styles from "./Store.module.css";
-export default function Store({company_data}) {
-  const company_name = company_data.name;
-  const balance = company_data.balance;
-  const inventory = company_data.inventory;
-  const computersInStock = company_data.computersInStock;
+import { api } from "../../api/api-client";
+export default function Store({store_data, refresh, setRefresh}) {
+  const store_name = store_data.storeName;
+  const balance = store_data?.balance;
+  const inventory = store_data?.inventory;
+  const computersInStock = store_data?.computersInStock;
+
+  const removeStore = async() => {
+    const resp = await api.removeStore(store_name);
+    
+    if(resp.statusCode !== 200){
+      alert("invalid login: please login as admin user")
+    } else {
+      setRefresh(refresh+1);
+    }
+  }
 
   return (
     <div id={styles.company}>
       <div id={styles.companySpecs}>
-        <h2> {company_name} </h2>
+        <h2> {store_name} </h2>
         <div>
           <ul>
             <li>Inventory: ${inventory}</li>
@@ -19,7 +30,7 @@ export default function Store({company_data}) {
       </div>
       <div id={styles.companyButtons}>
         <button className={styles.buttons}>Inventory Report</button>
-        <button className={styles.buttons}>Delete Store</button>
+        <button className={styles.buttons} onClick={removeStore}>Delete Store</button>
       </div>
     </div>
   );
