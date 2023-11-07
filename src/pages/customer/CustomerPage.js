@@ -33,6 +33,11 @@ export default function CustomerPage({computer_data, refresh, setRefresh}) {
     //refreshParent()
   }
 
+  const filter = () => {
+    //TODO: implement
+    //refreshParent()
+  }
+
   return (
     <div className={styles.wrapper}>
       <h3>Customer Page</h3>
@@ -88,7 +93,9 @@ export default function CustomerPage({computer_data, refresh, setRefresh}) {
               <label><input className="CheckBox" type="checkbox" id="2500" name="Price" value="$2001 or more"></input>$2001 or more</label>
             </div>
           </form>
+          <br></br>
 
+          <button onClick={filter}>Filter Computers</button>
         </div>
         <div id={styles.computer_view}>
           {computers}
