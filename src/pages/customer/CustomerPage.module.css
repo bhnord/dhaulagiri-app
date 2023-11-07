@@ -47,7 +47,12 @@ label {
     display: flex;
     align-items:first baseline;
     flex-direction: column; /* Stacking elements vertically */
-  }
+}
+
+#compare_div{
+    display: flex;
+}
+  
 
 #computer_compare {
     width: 50%;
@@ -64,6 +69,7 @@ p {
 button {
     margin-left: 30px;
 }
+
 input[type="radio"] {
     vertical-align: middle;
     margin-right: 10px;
