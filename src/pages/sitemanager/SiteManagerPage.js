@@ -38,7 +38,7 @@ export default function SiteManagerPage() {
       <h3>SiteManagerPage</h3>
       <div className={styles.content}>
         <div id={styles.site_reports}>{stores.map((x) => 
-          <Store key={x.storeName} store_data={x}/>
+          <Store key={x.storeName} store_data={x} refresh={refresh} setRefresh={setRefresh}/>
         )}</div>
         <div id={styles.store_view}>
           <p>Total Inventory $ Amount: ${totalInventoryAmt}</p>

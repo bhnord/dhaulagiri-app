@@ -16,8 +16,7 @@ export default function StoreOwnerPage() {
         const getComputers = async () => {
             const resp = await api.generateStoreInventory();
             const computers = resp.computers;
-            const inventory = resp.inventory.toFixed(2);
-            console.log(inventory)
+            const inventory = resp ?. inventory ?. toFixed(2);
 
             if (resp.statusCode !== 200) {
                 alert("invalid login")
