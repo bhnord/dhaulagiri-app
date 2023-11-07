@@ -1,4 +1,15 @@
-#navbar{
-    height: 55px;
-    background-color: rgb(150, 150, 247);
+.navbar {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    background-color: #675D83;
+}
+
+.button {
+    padding: 8px 16px;
+    margin: 0 10px; /* Adjust margins as needed */
+    border: none;
+    background-color: #eaeaea;
+    color: #333;
+    border-radius: 5px;
 }

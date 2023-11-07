@@ -12,7 +12,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-color: #675D83;
+    background-color: #BBB2DF;
     width: 200px;
     height: 70px;
     font-size: 25px;
@@ -21,7 +21,6 @@
     color: white;
     border-color: #675D83;
     border-radius:5px;
-    background-color: #675D83;
 }
 
 #topRightLoginButton {
