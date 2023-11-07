@@ -1,9 +1,9 @@
 import styles from "./Store.module.css";
-export default function Store({company_data}) {
-  const company_name = company_data.name;
-  const balance = company_data.balance;
-  const inventory = company_data.inventory;
-  const computersInStock = company_data.computersInStock;
+export default function Store({store_data}) {
+  const company_name = store_data.storeName;
+  const balance = store_data?.balance;
+  const inventory = store_data?.inventory;
+  const computersInStock = store_data?.computersInStock;
 
   return (
     <div id={styles.company}>

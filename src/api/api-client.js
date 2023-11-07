@@ -82,15 +82,15 @@ class Api { // TODO: remove this as hard-coded values
                     username: this.username,
                     password: this.password,
                     storeName: this.storeName,
-
-                    computerName: computerName,
-                    ram: ram,
-                    storage: storage,
-                    processor: processor,
-                    processGen: processGen,
-                    graphics: graphics,
-                    price: price
-
+                    computer: {
+                        computerName: computerName,
+                        ram: ram,
+                        storage: storage,
+                        processor: processor,
+                        processGen: processGen,
+                        graphics: graphics,
+                        price: price
+                    }
 
                 }
             )
@@ -99,6 +99,18 @@ class Api { // TODO: remove this as hard-coded values
         return fetch(aws_path + endpoint, requestOptions).then((response) => response.json());
     }
 
+    listStores() {
+        const endpoint = "list-stores";
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+        };
+
+        return fetch(aws_path + endpoint, requestOptions).then((response) => response.json());
+
+    }
 
 }
 
