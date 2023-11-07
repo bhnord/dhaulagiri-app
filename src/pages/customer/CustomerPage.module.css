@@ -64,3 +64,7 @@ p {
 button {
     margin-left: 30px;
 }
+input[type="radio"] {
+    vertical-align: middle;
+    margin-right: 10px;
+}
