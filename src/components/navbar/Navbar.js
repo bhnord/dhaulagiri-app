@@ -11,6 +11,5 @@ export default function Navbar() {
     <Navbutton text="Store Owner Home" link="/storeowner"/>
     <Navbutton text="Customer Home" link="/customer"/>
     <Navbutton text="Create Store" link="/createstore"/>
-    
   </div>
 }

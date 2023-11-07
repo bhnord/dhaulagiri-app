@@ -34,9 +34,20 @@
     /* padding: 20px */
 }
 
-#compare_div{
+label {
     display: flex;
+    align-items: left;
 }
+
+.checkbox{
+    margin-right: 10px;  
+}
+
+.checkbox_div{
+    display: flex;
+    align-items:first baseline;
+    flex-direction: column; /* Stacking elements vertically */
+  }
 
 #computer_compare {
     width: 50%;
@@ -45,12 +56,6 @@
     border-width: 2px;
     border-style: solid;
     padding: 20px
-}
-
-
-#checkbox_div {
-    display: inline-block; 
-    vertical-align: left;
 }
 
 p {
