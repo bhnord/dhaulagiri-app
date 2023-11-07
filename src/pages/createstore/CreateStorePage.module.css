@@ -1,7 +1,69 @@
-.inputStyle {
-    margin-top: 10px;
+/* Example CSS for styling input elements */
+
+.inputBoxes {
+    width: 200px;
+    padding:10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px; /* Adjust the margin to create space around the input fields */
 }
 
-#createButton {
+#topLeftLoginButton {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #675D83;
+    width: 200px;
+    height: 70px;
+    font-size: 25px;
+    border-width: 0.5px;
+    font-weight: bold;
+    color: white;
+    border-color: #675D83;
+    border-radius:5px;
+    background-color: #675D83;
+}
+
+#topRightLoginButton {
+    position: absolute;
+    top: 0;
+    left: 200px;
+    border-radius:5px;
+    background-color: #675D83;
+    width: 200px;
+    height: 70px;
+    border-color: #675D83;
+    border-width: 0.5px;
+    border-radius:5px;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+}
+
+#createstorebutton{
+    background-color: #BBB2DF;
+    border-radius: 15px;
+    width: 200px;
+    height: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    border-color: #675D83;
+    border-width: 0.5px;
     margin-top: 20px;
+}
+
+.container {
+    width: 400px;
+    height: 500px;
+    background-color: #f0f0f0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius:5px;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

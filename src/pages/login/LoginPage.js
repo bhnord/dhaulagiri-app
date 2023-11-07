@@ -1,5 +1,8 @@
 import {useAuth} from "../../auth/AuthContext";
 import {api} from "../../api/api-client";
+import styles from "./LoginPage.module.css";
+import { Link } from 'react-router-dom';
+
 export default function LoginPage() {
     const {setUser, user} = useAuth();
     const loginStoreOwner = () => {
@@ -24,12 +27,15 @@ export default function LoginPage() {
         Array.from(document.getElementsByTagName("input")).forEach(e=>{e.value=""});
     }
 
-
-    return (<div>
-        <input id="username" type="text" placeholder="username"/>
-        <input id="password" type="password" placeholder="password"/>
-        <input id="storeName" type="text" placeholder="store name"/>
-        <button onClick={login}>Login</button>
+    return (<div class={styles.container}>
+        <button id={styles.topLeftLoginButton} onClick={login}>Login</button>
+        <Link to="/createstore">
+        <button id={styles.topRightLoginButton}>Create Store</button>
+        </Link>        
+        <input id={styles.username} className="inputField" type="text" placeholder="Enter Username" />
+        <input id={styles.password} className="inputField" type="password" placeholder="Enter Password"/>
+        <input id={styles.storeName} className="inputField" type="text" placeholder="Enter Store Name"/>
+        <button id={styles.loginbutton} onClick={login}>Login</button>
         <button onClick={logout}>Logout</button>
         <div style={{marginTop: 20}}>
             Dev Tools: <br/>
