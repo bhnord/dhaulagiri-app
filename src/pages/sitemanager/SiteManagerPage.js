@@ -8,17 +8,17 @@ export default function SiteManagerPage() {
   const [refresh, setRefresh] = useState(0);
 
   //will be returned from lambda
-  const totalInventoryAmt = 10000;
-  const siteManagerBalance = 43005;
-  const siteBalance = 100000;
+  const totalInventoryAmt = null;
+  const siteManagerBalance = null;
+  const siteBalance = null;
 
   useEffect(() => {
     const getStores = async() => {
-      const c = await api.listStores();
-      if(c.statusCode !== 200){
+      const resp = await api.listStores();
+      if(resp.statusCode !== 200){
         alert("invalid login")
       } else {
-        setStores(c.stores)
+        setStores(resp.stores)
       }
     }
     getStores();
