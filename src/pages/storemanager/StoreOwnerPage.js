@@ -4,7 +4,7 @@ import {api} from "../../api/api-client";
 import {useEffect, useState} from "react";
 export default function StoreOwnerPage() {
     const [computers, setComputers] = useState([]);
-    const [inventory, setInventory] = useState(0);
+    const [inventory, setInventory] = useState(null);
     const [refresh, setRefresh] = useState(0);
 
 

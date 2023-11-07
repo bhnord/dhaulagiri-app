@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 export default function SiteManagerPage() {
 
   const [stores, setStores] = useState([]);
+  const [totalInventory, setTotalInventory] = useState(0);
   const [refresh, setRefresh] = useState(0);
 
   //will be returned from lambda
@@ -15,10 +16,17 @@ export default function SiteManagerPage() {
   useEffect(() => {
     const getStores = async() => {
       const resp = await api.listStores();
-      if(resp.statusCode !== 200){
+      const respInventory = await api.generateTotalInventory();
+      if(resp.statusCode !== 200 || respInventory.statusCode !== 200){
         alert("invalid login")
       } else {
         setStores(resp.stores)
+
+        let total = 0;
+        for (let store in respInventory?.stores){
+          total+=respInventory.stores[store].inventory;
+        }
+        setTotalInventory(total?.toFixed(2));
       }
     }
     getStores();
@@ -41,7 +49,7 @@ export default function SiteManagerPage() {
           <Store key={x.storeName} store_data={x} refresh={refresh} setRefresh={setRefresh}/>
         )}</div>
         <div id={styles.store_view}>
-          <p>Total Inventory $ Amount: ${totalInventoryAmt}</p>
+          <p>Total Inventory $ Amount: ${totalInventory}</p>
           <p>Site Manager Balance: ${siteManagerBalance}</p>
           <p>Site Balance: ${siteBalance}</p>
           <p>Generate Site Reports:</p>

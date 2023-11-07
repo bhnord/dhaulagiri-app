@@ -13,6 +13,7 @@ class Api { // TODO: remove this as hard-coded values
         this.logout();
         this.username = username;
         this.password = password;
+        this.storeName = storeName;
         // TODO: add some kind of login checking through lambda
     }
 
@@ -103,13 +104,30 @@ class Api { // TODO: remove this as hard-coded values
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
-            },
+            }
         };
 
         return fetch(aws_path + endpoint, requestOptions).then((response) => response.json());
 
     }
 
+    generateTotalInventory() {
+        const endpoint = "generate-total-inventory";
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                siteName: this.storeName,
+                username: this.username,
+                password: this.password
+            })
+        };
+
+        return fetch(aws_path + endpoint, requestOptions).then((response) => response.json());
+
+    }
 }
 
 export let api = new Api();
