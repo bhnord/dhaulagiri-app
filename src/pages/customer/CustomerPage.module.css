@@ -44,7 +44,7 @@ label {
     flex-direction: column; /* Stacking elements vertically */
 }
 
-  #computer_compare {
+#computer_compare {
     width: 50%;
     min-height: 85vh;
     padding: 20px;
