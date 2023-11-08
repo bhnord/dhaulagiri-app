@@ -9,7 +9,6 @@ export default function SiteManagerPage() {
   const [refresh, setRefresh] = useState(0);
 
   //will be returned from lambda
-  const totalInventoryAmt = null;
   const siteManagerBalance = null;
   const siteBalance = null;
 
@@ -31,9 +30,6 @@ export default function SiteManagerPage() {
     }
     getStores();
   }, [refresh]);
-  //will be returned from lambda
-
-  //load examples
 
   return (
     <div className={styles.wrapper}>
