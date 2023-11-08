@@ -1,15 +1,31 @@
 import styles from "./Navbar.module.css"
 import Navbutton from "./Navbutton/Navbutton";
 import { useAuth } from "../../auth/AuthContext";
+import { Link } from 'react-router-dom';
+
 export default function Navbar() {
-  const {auth, user} = useAuth()
-  return <div id={styles.navbar}>
-    {auth ? <span>Logged in as: "{user?.username}" of "{user?.storeName}"</span> : <span>Not Logged In</span>}
-    <Navbutton text="Login" link="/login"/>
-    <Navbutton text="Home" link="/"/>
-    <Navbutton text="Site Manager Home" link="/sitemanager"/>
-    <Navbutton text="Store Owner Home" link="/storeowner"/>
-    <Navbutton text="Customer Home" link="/customer"/>
-    <Navbutton text="Create Store" link="/createstore"/>
+  const { auth, setUser, user } = useAuth();
+
+  const logout = () => {
+    setUser(null);
+  }
+
+  return <div className={styles.navbar}>
+    <Navbutton text="Home" link="/customer" />
+    <Navbutton text="Site Manager Home" link="/sitemanager" />
+    <Navbutton text="Store Owner Home" link="/storeowner" />
+    {auth ?
+      (<div>
+        <Link to="/login">
+          <button className={styles.button} onClick={logout}>Logout</button>
+        </Link>
+          (Logged in as {user?.username})
+      </div>) :
+      (<div>
+        <Link to="/login">
+          <button className={styles.button}>Login/Sign Up</button>
+        </Link>
+      </div>)}
+
   </div>
 }
