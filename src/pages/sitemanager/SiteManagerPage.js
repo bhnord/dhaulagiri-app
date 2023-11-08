@@ -32,12 +32,6 @@ export default function SiteManagerPage() {
     getStores();
   }, [refresh]);
   //will be returned from lambda
-  const c_data = {
-    name: "Store1",
-    balance: 1000,
-    inventory: 1000,
-    computersInStock: 43,
-  };
 
   //load examples
 
