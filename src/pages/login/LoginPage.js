@@ -1,10 +1,9 @@
 import {useAuth} from "../../auth/AuthContext";
-import {api} from "../../api/api-client";
 import styles from "./LoginPage.module.css";
 import { Link } from 'react-router-dom';
 
 export default function LoginPage() {
-    const {setUser, user} = useAuth();
+    const {setUser} = useAuth();
     const loginStoreOwner = () => {
         setUser({username: "sam", password: "samantha", storeName: "Sam Store"})
         Array.from(document.getElementsByTagName("input")).forEach(e=>{e.value=""});
