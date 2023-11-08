@@ -12,6 +12,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    margin-left:-1px;
     background-color: #BBB2DF;
     width: 200px;
     height: 70px;
@@ -27,6 +28,7 @@
     position: absolute;
     top: 0;
     left: 200px;
+    margin-left:-1px;
     border-radius:5px;
     background-color: #675D83;
     width: 200px;
