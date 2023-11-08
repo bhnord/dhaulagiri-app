@@ -3,9 +3,6 @@ import {api} from "../../api/api-client";
 import styles from "./LoginPage.module.css";
 import { Link } from 'react-router-dom';
 
-import styles from "./LoginPage.module.css";
-import { Link } from 'react-router-dom';
-
 export default function LoginPage() {
     const {setUser, user} = useAuth();
     const loginStoreOwner = () => {
@@ -26,10 +23,12 @@ export default function LoginPage() {
     }
 
     return (<div className={styles.container}>
-        <button id={styles.topLeftLoginButton}>Login</button>
-        <Link to="/createstore">
-        <button id={styles.topRightLoginButton}>Create Store</button>
-        </Link>        
+        <div className="button-container">
+            <button className={styles.topLeftLoginButton}>Login</button>
+            <Link to="/createstore">
+            <button className={styles.topRightLoginButton}>Create Store</button>
+            </Link>
+        </div>
         <input id="username" className={styles.inputBoxes} type="text" placeholder="Enter Username" />
         <input id="password" className={styles.inputBoxes} type="password" placeholder="Enter Password"/>
         <input id="storeName" className={styles.inputBoxes} type="text" placeholder="Enter Store Name"/>

@@ -3,8 +3,6 @@ import Navbutton from "./Navbutton/Navbutton";
 import { useAuth } from "../../auth/AuthContext";
 import { Link } from 'react-router-dom';
 
-import { Link } from 'react-router-dom';
-
 export default function Navbar() {
   const { auth, setUser, user } = useAuth();
 
@@ -13,7 +11,7 @@ export default function Navbar() {
   }
 
   return <div className={styles.navbar}>
-    <Navbutton text="Home" link="/" />
+    <Navbutton text="Home" link="/customer" />
     <Navbutton text="Site Manager Home" link="/sitemanager" />
     <Navbutton text="Store Owner Home" link="/storeowner" />
     {auth ?

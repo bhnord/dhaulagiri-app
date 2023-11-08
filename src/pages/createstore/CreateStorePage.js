@@ -2,7 +2,6 @@ import styles from './CreateStorePage.module.css'
 import {api} from '../../api/api-client'
 import {useNavigate} from 'react-router-dom'
 import { Link } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 export default function CreateStorePage() {
     const navigate = useNavigate();
