@@ -40,7 +40,6 @@ export default function CustomerPage({computer_data, refresh, setRefresh}) {
 
   return (
     <div className={styles.wrapper}>
-      <h3>Customer Page</h3>
       <div className={styles.content}>
         <div id={styles.filter_view}>
           <h3>Filter</h3>
@@ -101,14 +100,11 @@ export default function CustomerPage({computer_data, refresh, setRefresh}) {
           {computers}
         </div>
         <div id={styles.compare_view}>
-          <h3>Compare Computers</h3>
-          <button onClick={compare}>Compare Computers</button>
+          <button className = {styles.compareButton} onClick={compare}>Compare Computers</button>
           <div id={styles.compare_div}>
             <div id={styles.computer_compare}>
-
             </div>
             <div id={styles.computer_compare}>
-
             </div>
           </div>
         </div>
