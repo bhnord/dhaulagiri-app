@@ -10,7 +10,7 @@ export default function LoginPage() {
         Array.from(document.getElementsByTagName("input")).forEach(e=>{e.value=""});
     }
     const loginSiteAdmin = () => {
-        setUser({username: "computerStoreAdmin", password: "dhaulagiri", storeName: "Computer Store"})
+        setUser({username: "computerStoreAdmin", password: "dhaulagiri", storeName: "computerStore"})
         Array.from(document.getElementsByTagName("input")).forEach(e=>{e.value=""});
     }
 
