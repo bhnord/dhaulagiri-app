@@ -74,3 +74,7 @@ input[type="radio"] {
     vertical-align: middle;
     margin-right: 10px;
 }
+select {
+    display: flex;
+    align-items:first baseline;
+}

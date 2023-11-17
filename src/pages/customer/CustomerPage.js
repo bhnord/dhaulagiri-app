@@ -45,6 +45,14 @@ export default function CustomerPage({computer_data, refresh, setRefresh}) {
         <div id={styles.filter_view}>
           <h3>Filter</h3>
 
+          <label>Choose a store: </label>
+          <form>
+            <select name="Store" id="Store">
+              <option value="any">Any from list</option>
+            </select>
+          </form>
+          <br></br>
+          
           <form>
             <div className={styles.checkbox_div}>
               <label><input className={styles.checkbox} type="checkbox" id="4GB" name="RAM" value="4GB or less" />4GB or less</label>
