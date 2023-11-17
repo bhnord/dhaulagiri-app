@@ -1,32 +1,49 @@
 import styles from "./CustomerPage.module.css";
 import Computer from "../../components/computer/CustomerComputer";
+import {api} from "../../api/api-client";
+import {useEffect, useState} from "react";
 
-export default function CustomerPage({computer_data, refresh, setRefresh}) {
+export default function CustomerPage() {
+  const [computers, setComputers] = useState([]);
+  const [refresh, setRefresh] = useState(0);
 
   //will be returned from lambda
   // const storeBalance = 10000;
   // const totalInventory = 43005;
 
   //will be returned from lambda
-  const c_data = {
-    name: "Computer X",
-    ram: 12,
-    storage: 10,
-    processor: "AMD",
-    processor_generation: 10,
-    graphics: "NVDIA",
-    price: 1000,
-  };
+  // const c_data = {
+  //   name: "Computer X",
+  //   ram: 12,
+  //   storage: 10,
+  //   processor: "AMD",
+  //   processor_generation: 10,
+  //   graphics: "NVDIA",
+  //   price: 1000,
+  // };
 
   //load examples
-  const computers = [];
-  for (let i = 0; i < 3; i++) {
-    computers.push(<Computer key={i} computer_data={c_data} />);
-  }
+  // const computers = [];
+  // for (let i = 0; i < 3; i++) {
+  //   computers.push(<Computer key={i} computer_data={c_data} />);
+  // }
 
-  const refreshParent = () => {
-    setRefresh(refresh + 1)
-  }
+  useEffect(() => {
+    const getComputers = async () => {
+        const resp = await api.generateStoreInventory();
+        const computers = resp.computers;
+        // const inventory = resp ?. inventory ?. toFixed(2);
+
+        if (resp.statusCode !== 200) {
+            alert("invalid login")
+
+        } else {
+            setComputers(computers)
+            // setInventory(inventory)
+        }
+    };
+    getComputers();
+  }, [refresh])
 
   const compare = () => {
     //TODO: implement
@@ -49,10 +66,11 @@ export default function CustomerPage({computer_data, refresh, setRefresh}) {
           <form>
             <select name="Store" id="Store">
               <option value="any">Any from list</option>
+
             </select>
           </form>
           <br></br>
-          
+
           <form>
             <div className={styles.checkbox_div}>
               <label><input className={styles.checkbox} type="checkbox" id="4GB" name="RAM" value="4GB or less" />4GB or less</label>
@@ -106,7 +124,12 @@ export default function CustomerPage({computer_data, refresh, setRefresh}) {
           <button onClick={filter}>Filter Computers</button>
         </div>
         <div id={styles.computer_view}>
-          {computers}
+          {computers.map((computer) => <Computer key={
+                        computer.computerID
+                    }
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                    computer_data={computer}/>)}
         </div>
         <div id={styles.compare_view}>
           <h3>Compare Computers</h3>
