@@ -5,11 +5,8 @@ import {useEffect, useState} from "react";
 
 export default function CustomerPage() {
   const [computers, setComputers] = useState([]);
+  const [stores, setStores] = useState([]);
   const [refresh, setRefresh] = useState(0);
-
-  //will be returned from lambda
-  // const storeBalance = 10000;
-  // const totalInventory = 43005;
 
   //will be returned from lambda
   // const c_data = {
@@ -45,6 +42,23 @@ export default function CustomerPage() {
     getComputers();
   }, [refresh])
 
+  useEffect(() => {
+    const getStores = async () => {
+        const resp = await api.listStores();
+        const stores = resp.stores;
+        // const inventory = resp ?. inventory ?. toFixed(2);
+
+        if (resp.statusCode !== 200) {
+            alert("invalid login")
+
+        } else {
+            setStores(stores)
+            // setInventory(inventory)
+        }
+    };
+    getStores();
+  }, [refresh])
+
   const compare = () => {
     //TODO: implement
     //refreshParent()
@@ -65,7 +79,7 @@ export default function CustomerPage() {
           <form>
             <select name="Store" id="Store">
               <option value="any">Any from list</option>
-
+              
             </select>
           </form>
           <br></br>
@@ -134,8 +148,10 @@ export default function CustomerPage() {
           <button className = {styles.compareButton} onClick={compare}>Compare Computers</button>
           <div id={styles.compare_div}>
             <div id={styles.computer_compare}>
+
             </div>
             <div id={styles.computer_compare}>
+
             </div>
           </div>
         </div>
