@@ -1,5 +1,6 @@
 import styles from "./CustomerPage.module.css";
 import Computer from "../../components/computer/CustomerComputer";
+import Store from "../../components/store/FilterStore";
 import {api} from "../../api/api-client";
 import {useEffect, useState} from "react";
 
@@ -25,22 +26,22 @@ export default function CustomerPage() {
   //   computers.push(<Computer key={i} computer_data={c_data} />);
   // }
 
-  useEffect(() => {
-    const getComputers = async () => {
-        const resp = await api.generateStoreInventory();
-        const computers = resp.computers;
-        // const inventory = resp ?. inventory ?. toFixed(2);
+  // useEffect(() => {
+  //   const getComputers = async () => {
+  //       const resp = await api.generateStoreInventory();
+  //       const computers = resp.computers;
+  //       // const inventory = resp ?. inventory ?. toFixed(2);
 
-        if (resp.statusCode !== 200) {
-            alert("invalid login")
+  //       if (resp.statusCode !== 200) {
+  //           alert("invalid login")
 
-        } else {
-            setComputers(computers)
-            // setInventory(inventory)
-        }
-    };
-    getComputers();
-  }, [refresh])
+  //       } else {
+  //           setComputers(computers)
+  //           // setInventory(inventory)
+  //       }
+  //   };
+  //   getComputers();
+  // }, [refresh])
 
   useEffect(() => {
     const getStores = async () => {
@@ -52,7 +53,7 @@ export default function CustomerPage() {
             alert("invalid login")
 
         } else {
-            setStores(stores)
+            setStores(stores);
             // setInventory(inventory)
         }
     };
@@ -64,9 +65,24 @@ export default function CustomerPage() {
     //refreshParent()
   }
 
-  const filter = () => {
+  const filter = () => { 
     //TODO: implement
-    //refreshParent()
+    const elem = document.getElementById("StoreSelect");
+    const v = elem.value;
+
+    const getStoreComputers = async () => {
+        const resp = await api.generateStoreInventory(v);
+        const computers = resp.computers;
+
+        if (resp.statusCode !== 200) {
+            alert("invalid login")
+
+        } else {
+            setComputers(computers)
+        }
+    };
+    getStoreComputers();
+    setRefresh(refresh+1);
   }
 
   return (
@@ -77,9 +93,13 @@ export default function CustomerPage() {
 
           <label>Choose a store: </label>
           <form>
-            <select name="Store" id="Store">
-              <option value="any">Any from list</option>
-              
+            <select name="Store" id="StoreSelect">
+              <option value="any" key="any">Any from list</option>
+              {stores.map((store) => <Store 
+                    key={store.store_name}
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                    store_data={store}/>)}
             </select>
           </form>
           <br></br>
@@ -137,12 +157,12 @@ export default function CustomerPage() {
           <button onClick={filter}>Filter Computers</button>
         </div>
         <div id={styles.computer_view}>
-          {computers.map((computer) => <Computer key={
-                        computer.computerID
+          {computers.map((comp) => <Computer key={
+                        comp.computerID
                     }
                     refresh={refresh}
                     setRefresh={setRefresh}
-                    computer_data={computer}/>)}
+                    computer_data={comp}/>)}
         </div>
         <div id={styles.compare_view}>
           <button className = {styles.compareButton} onClick={compare}>Compare Computers</button>
