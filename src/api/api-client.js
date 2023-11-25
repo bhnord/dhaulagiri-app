@@ -128,6 +128,26 @@ class Api { // TODO: remove this as hard-coded values
         return fetch(aws_path + endpoint, requestOptions).then((response) => response.json());
 
     }
+
+    removeComputer(computerID) {
+        const endpoint = "remove-computer";
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(
+            {
+                    username: this.username, 
+                    password: this.password, 
+                    storeName: this.storeName,
+                    computerID: computerID
+            }
+            )
+        };
+
+        return fetch(aws_path + endpoint, requestOptions).then((response) => response.json());
+    }
 }
 
 export let api = new Api();

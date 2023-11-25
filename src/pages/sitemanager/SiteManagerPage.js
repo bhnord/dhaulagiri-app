@@ -7,25 +7,19 @@ export default function SiteManagerPage() {
   const [stores, setStores] = useState([]);
   const [totalInventory, setTotalInventory] = useState(0);
   const [refresh, setRefresh] = useState(0);
+  const [siteBalance, setSiteBalance] = useState(0)
 
   //will be returned from lambda
-  const siteManagerBalance = null;
-  const siteBalance = null;
 
   useEffect(() => {
     const getStores = async() => {
-      const resp = await api.listStores();
       const respInventory = await api.generateTotalInventory();
-      if(resp.statusCode !== 200 || respInventory.statusCode !== 200){
+      if(respInventory.statusCode !== 200){
         alert("invalid login")
       } else {
-        setStores(resp.stores)
-
-        let total = 0;
-        for (let store in respInventory?.stores){
-          total+=respInventory.stores[store].inventory;
-        }
-        setTotalInventory(total?.toFixed(2));
+        setStores(respInventory.stores)
+        setTotalInventory(respInventory.totalInventory);
+        setSiteBalance(respInventory.adminBalance);
       }
     }
     getStores();
@@ -40,7 +34,6 @@ export default function SiteManagerPage() {
         )}</div>
         <div id={styles.store_view}>
           <p>Total Inventory $ Amount: ${totalInventory}</p>
-          <p>Site Manager Balance: ${siteManagerBalance}</p>
           <p>Site Balance: ${siteBalance}</p>
           <p>Generate Site Reports:</p>
           <button className={styles.buttons}>Internal Profit Report</button>
