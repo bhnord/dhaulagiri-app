@@ -66,22 +66,47 @@ export default function CustomerPage() {
   }
 
   const filter = () => { 
-    //TODO: implement
     const elem = document.getElementById("StoreSelect");
     const v = elem.value;
 
-    const getStoreComputers = async () => {
-        const resp = await api.generateStoreInventory(v);
-        const computers = resp.computers;
+    if(v !== "any"){
+      const getStoreComputers = async () => {
+          const resp = await api.generateStoreInventory(v);
+          const computers = resp.computers;
 
-        if (resp.statusCode !== 200) {
-            alert("invalid login")
+          if (resp.statusCode !== 200) {
+              alert("invalid login")
 
-        } else {
-            setComputers(computers)
+          } else {
+              setComputers(computers);
+          }
+      };
+      getStoreComputers();
+    }
+
+    else {
+      var num_processed = 1;
+      for(var i = 1; i < elem.options.length; i++){
+        var computers = [];
+        const getStoreComputers = async () => {
+          const resp = await api.generateStoreInventory(elem.options[i].value);
+          const new_computers = resp.computers;
+
+          if (resp.statusCode !== 200) {
+              alert("invalid login");
+          }
+          else{
+            computers.push(new_computers);
+            num_processed += 1;
+            if(num_processed === elem.options.length){
+              computers = computers.flat(1);
+              setComputers(computers);
+            }
+          }
         }
-    };
-    getStoreComputers();
+        getStoreComputers();
+      }
+    }
     setRefresh(refresh+1);
   }
 
@@ -95,8 +120,7 @@ export default function CustomerPage() {
           <form>
             <select name="Store" id="StoreSelect">
               <option value="any" key="any">Any from list</option>
-              {stores.map((store) => <Store 
-                    key={store.store_name}
+              {stores.map((store) => <Store key={store.store_name}
                     refresh={refresh}
                     setRefresh={setRefresh}
                     store_data={store}/>)}
