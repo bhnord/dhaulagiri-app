@@ -1,4 +1,6 @@
 import styles from './Computer.module.css'
+import { api } from "../../api/api-client";
+
 export default function Computer({computer_data, refresh, setRefresh}) {
     const computerID = computer_data.computerID
     const name = computer_data.computerName
@@ -17,9 +19,13 @@ export default function Computer({computer_data, refresh, setRefresh}) {
       //TODO: implement
       //refreshParent()
     }
-    const remove = () => {
-      //TODO: implement
-      //refreshParent()
+    const remove = async() => {
+        const resp = await api.removeComputer(computerID);
+        if(resp.statusCode !== 200){
+            alert("invalid login: please login as store owner")
+        } else {
+            refreshParent()
+        }
     }
 
     return (<div id={

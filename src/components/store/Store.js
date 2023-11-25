@@ -2,7 +2,7 @@ import styles from "./Store.module.css";
 import { api } from "../../api/api-client";
 export default function Store({store_data, refresh, setRefresh}) {
   const store_name = store_data.storeName;
-  const balance = store_data?.balance;
+  const balance = store_data.balance;
   const inventory = store_data?.inventory;
   const computersInStock = store_data?.computersInStock;
 
