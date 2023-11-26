@@ -1,41 +1,113 @@
 import styles from "./CustomerPage.module.css";
 import Computer from "../../components/computer/CustomerComputer";
+import Store from "../../components/store/FilterStore";
+import {api} from "../../api/api-client";
+import {useEffect, useState} from "react";
 
-export default function CustomerPage({computer_data, refresh, setRefresh}) {
+export default function CustomerPage() {
+  const [computers, setComputers] = useState([]);
+  const [stores, setStores] = useState([]);
+  const [refresh, setRefresh] = useState(0);
 
   //will be returned from lambda
-  // const storeBalance = 10000;
-  // const totalInventory = 43005;
-
-  //will be returned from lambda
-  const c_data = {
-    name: "Computer X",
-    ram: 12,
-    storage: 10,
-    processor: "AMD",
-    processor_generation: 10,
-    graphics: "NVDIA",
-    price: 1000,
-  };
+  // const c_data = {
+  //   name: "Computer X",
+  //   ram: 12,
+  //   storage: 10,
+  //   processor: "AMD",
+  //   processor_generation: 10,
+  //   graphics: "NVDIA",
+  //   price: 1000,
+  // };
 
   //load examples
-  const computers = [];
-  for (let i = 0; i < 3; i++) {
-    computers.push(<Computer key={i} computer_data={c_data} />);
-  }
+  // const computers = [];
+  // for (let i = 0; i < 3; i++) {
+  //   computers.push(<Computer key={i} computer_data={c_data} />);
+  // }
 
-  const refreshParent = () => {
-    setRefresh(refresh + 1)
-  }
+  // useEffect(() => {
+  //   const getComputers = async () => {
+  //       const resp = await api.generateStoreInventory();
+  //       const computers = resp.computers;
+  //       // const inventory = resp ?. inventory ?. toFixed(2);
+
+  //       if (resp.statusCode !== 200) {
+  //           alert("invalid login")
+
+  //       } else {
+  //           setComputers(computers)
+  //           // setInventory(inventory)
+  //       }
+  //   };
+  //   getComputers();
+  // }, [refresh])
+
+  useEffect(() => {
+    const getStores = async () => {
+        const resp = await api.listStores();
+        const stores = resp.stores;
+        // const inventory = resp ?. inventory ?. toFixed(2);
+
+        if (resp.statusCode !== 200) {
+            alert("invalid login")
+
+        } else {
+            setStores(stores);
+            // setInventory(inventory)
+        }
+    };
+    getStores();
+  }, [refresh])
 
   const compare = () => {
     //TODO: implement
     //refreshParent()
   }
 
-  const filter = () => {
-    //TODO: implement
-    //refreshParent()
+  const filter = () => { 
+    const elem = document.getElementById("StoreSelect");
+    const v = elem.value;
+
+    if(v !== "any"){
+      const getStoreComputers = async () => {
+          const resp = await api.generateStoreInventory(v);
+          const computers = resp.computers;
+
+          if (resp.statusCode !== 200) {
+              alert("invalid login")
+
+          } else {
+              setComputers(computers);
+          }
+      };
+      getStoreComputers();
+    }
+
+    else {
+      var num_processed = 1;
+      for(var i = 1; i < elem.options.length; i++){
+        var computers = [];
+        const getStoreComputers = async () => {
+          const resp = await api.generateStoreInventory(elem.options[i].value);
+          const new_computers = resp.computers;
+
+          if (resp.statusCode !== 200) {
+              alert("invalid login");
+          }
+          else{
+            computers.push(new_computers);
+            num_processed += 1;
+            if(num_processed === elem.options.length){
+              computers = computers.flat(1);
+              setComputers(computers);
+            }
+          }
+        }
+        getStoreComputers();
+      }
+    }
+    setRefresh(refresh+1);
   }
 
   return (
@@ -43,6 +115,18 @@ export default function CustomerPage({computer_data, refresh, setRefresh}) {
       <div className={styles.content}>
         <div id={styles.filter_view}>
           <h3>Filter</h3>
+
+          <label>Choose a store: </label>
+          <form>
+            <select name="Store" id="StoreSelect">
+              <option value="any" key="any">Any from list</option>
+              {stores.map((store) => <Store key={store.store_name}
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                    store_data={store}/>)}
+            </select>
+          </form>
+          <br></br>
 
           <form>
             <div className={styles.checkbox_div}>
@@ -97,14 +181,21 @@ export default function CustomerPage({computer_data, refresh, setRefresh}) {
           <button onClick={filter}>Filter Computers</button>
         </div>
         <div id={styles.computer_view}>
-          {computers}
+          {computers.map((comp) => <Computer key={
+                        comp.computerID
+                    }
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                    computer_data={comp}/>)}
         </div>
         <div id={styles.compare_view}>
           <button className = {styles.compareButton} onClick={compare}>Compare Computers</button>
           <div id={styles.compare_div}>
             <div id={styles.computer_compare}>
+
             </div>
             <div id={styles.computer_compare}>
+
             </div>
           </div>
         </div>
