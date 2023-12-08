@@ -47,11 +47,10 @@ export default function CustomerPage() {
       const computer2 = computers.find((comp) => comp.computerID === selectedComputers[1]);
   
       const compareContainer = document.getElementById(styles.computer_compare);
-      compareContainer.innerHTML = ''; // Clear previous content
+      compareContainer.innerHTML = '';
     
-      // Create a container for each computer
       const container1 = document.createElement('div');
-      container1.classList.add(styles.compareSpecs, styles.container); // Add styles.container class
+      container1.classList.add(styles.compareSpecs, styles.container);
       container1.innerHTML = `
         <div>
           <h2>${computer1.computerName}</h2>
@@ -64,15 +63,12 @@ export default function CustomerPage() {
         </div>
       `;
   
-      // Create a line element
       const line = document.createElement('div');
       line.classList.add(styles.compareLine);
   
-      // Create a container for the line
       const lineContainer = document.createElement('div');
       lineContainer.appendChild(line);
   
-      // Create a container for the second computer
       const container2 = document.createElement('div');
       container2.classList.add(styles.compareSpecs);
       container2.innerHTML = `
@@ -87,7 +83,6 @@ export default function CustomerPage() {
     </div>
   `;
   
-      // Append everything to the main container
       compareContainer.appendChild(container1);
       compareContainer.appendChild(lineContainer);
       compareContainer.appendChild(container2);
