@@ -8,7 +8,25 @@ export default function CustomerPage() {
   const [computers, setComputers] = useState([]);
   const [stores, setStores] = useState([]);
   const [refresh, setRefresh] = useState(0);
+  const [selectedComputers, setSelectedComputers] = useState([]);
 
+  const handleRadioClick = (computerID, checked) => {
+    setSelectedComputers((prevSelected) => {
+      // If checked, add the computerID to the array (max two elements)
+      if (checked) {
+        if (prevSelected.length < 2) {
+          return [...prevSelected, computerID];
+        } else {
+          // Deselect the oldest one and add the new one
+          return [prevSelected[1], computerID];
+        }
+      } else {
+        // If unchecked, remove the computerID from the array
+        return prevSelected.filter((id) => id !== computerID);
+      }
+    });
+  };
+    
   //will be returned from lambda
   // const c_data = {
   //   name: "Computer X",
@@ -181,12 +199,17 @@ export default function CustomerPage() {
           <button onClick={filter}>Filter Computers</button>
         </div>
         <div id={styles.computer_view}>
-          {computers.map((comp) => <Computer key={
-                        comp.computerID
-                    }
-                    refresh={refresh}
-                    setRefresh={setRefresh}
-                    computer_data={comp}/>)}
+        {computers.map((comp) => (
+            <div key={comp.computerID}>
+              <Computer
+                refresh={refresh}
+                setRefresh={setRefresh}
+                computer_data={comp}
+                selectedComputers={selectedComputers}
+                onRadioChange={handleRadioClick}
+              />
+            </div>
+          ))}
         </div>
         <div id={styles.compare_view}>
           <button className = {styles.compareButton} onClick={compare}>Compare Computers</button>

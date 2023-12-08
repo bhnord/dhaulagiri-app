@@ -1,17 +1,25 @@
-import styles from './Computer.module.css'
-export default function CustomerComputer({computer_data, refresh, setRefresh}) {
-  const computerID = computer_data.computerID
-  const name = computer_data.computerName
-  const ram = computer_data.ram
-  const storage = computer_data.storage
-  const processor = computer_data.processor
-  const processor_generation = computer_data.processGen
-  const graphics = computer_data.graphics
-  const price = computer_data.price
+import styles from './Computer.module.css';
+import React, { useEffect } from 'react';
 
-  const refreshParent = () => {
-    setRefresh(refresh + 1)
-  }
+export default function CustomerComputer({ computer_data, refresh, setRefresh, selectedComputers, onRadioChange }) {
+  const computerID = computer_data.computerID;
+  const name = computer_data.computerName;
+  const ram = computer_data.ram;
+  const storage = computer_data.storage;
+  const processor = computer_data.processor;
+  const processor_generation = computer_data.processGen;
+  const graphics = computer_data.graphics;
+  const price = computer_data.price;
+
+  const isChecked = selectedComputers.includes(computerID);
+
+  useEffect(() => {
+    onRadioChange(computerID, isChecked);
+  }, [computerID, isChecked, onRadioChange]);
+
+  const handleRadioClick = () => {
+    onRadioChange(computerID, !isChecked);
+  };
 
   return (
     <div id={styles.computer}>
@@ -31,7 +39,18 @@ export default function CustomerComputer({computer_data, refresh, setRefresh}) {
       <div>
         <form>
           <div id={styles.computerRadio}>
-            <label><input className="Radio" type="radio" id="Compare" name="Compare" value="Compare"></input>Compare</label>
+            <label>
+              <input
+                className="Radio"
+                type="checkbox"
+                id={`Compare-${computerID}`}
+                name={`Compare-${computerID}`}
+                value={`Compare-${computerID}`}
+                checked={isChecked}
+                onChange={handleRadioClick}
+              />
+              Compare
+            </label>
           </div>
         </form>
       </div>

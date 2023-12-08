@@ -19,7 +19,8 @@
 #computerRadio {
     width: 25%;
     margin:auto;
-    display: block;
+    display: flex;
+    align-items: center;
 }
 
 .buttons {
