@@ -1,6 +1,3 @@
-/* .wrapper {
-    height: 500px;
-} */
 .content{
     width: 100%;
     height: 100%;
@@ -10,7 +7,6 @@
 #computer_view, #site_reports {
     width: 50%;
     background-color: #ebe9eb;
-    /* display: inline-block; */
     min-height: 85vh; 
     padding: 20px
 }
@@ -41,16 +37,25 @@ label {
 .checkbox_div{
     display: flex;
     align-items:first baseline;
-    flex-direction: column; /* Stacking elements vertically */
+    flex-direction: column;
 }
 
+
 #computer_compare {
-    width: 50%;
-    min-height: 85vh;
+    margin-top: 70px;
     padding: 20px;
+    display: flex;
+    text-align: left;
+    justify-content: space-between;
     background-color: #ebe9eb;
-    border-right: 1px solid black;
 }
+
+.compareLine {
+    border-left: 1px solid #000000;
+    height: 100%;
+    margin: 0 10px;
+}
+
 
 p {
     font-size: 20px;
@@ -58,6 +63,13 @@ p {
 button {
     margin-left: 30px;
 }
+
+.compareSpecs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px; /* Adjust the margin as needed */
+  }
+  
 
 .compareButton {
     position: absolute;

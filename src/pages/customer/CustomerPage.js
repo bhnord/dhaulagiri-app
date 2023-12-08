@@ -8,40 +8,21 @@ export default function CustomerPage() {
   const [computers, setComputers] = useState([]);
   const [stores, setStores] = useState([]);
   const [refresh, setRefresh] = useState(0);
+  const [selectedComputers, setSelectedComputers] = useState([]);
 
-  //will be returned from lambda
-  // const c_data = {
-  //   name: "Computer X",
-  //   ram: 12,
-  //   storage: 10,
-  //   processor: "AMD",
-  //   processor_generation: 10,
-  //   graphics: "NVDIA",
-  //   price: 1000,
-  // };
-
-  //load examples
-  // const computers = [];
-  // for (let i = 0; i < 3; i++) {
-  //   computers.push(<Computer key={i} computer_data={c_data} />);
-  // }
-
-  // useEffect(() => {
-  //   const getComputers = async () => {
-  //       const resp = await api.generateStoreInventory();
-  //       const computers = resp.computers;
-  //       // const inventory = resp ?. inventory ?. toFixed(2);
-
-  //       if (resp.statusCode !== 200) {
-  //           alert("invalid login")
-
-  //       } else {
-  //           setComputers(computers)
-  //           // setInventory(inventory)
-  //       }
-  //   };
-  //   getComputers();
-  // }, [refresh])
+  const handleRadioClick = (computerID, checked) => {
+    setSelectedComputers((prevSelected) => {
+      if (checked) {
+        if (prevSelected.length < 2) {
+          return [...prevSelected, computerID];
+        } else {
+          return [prevSelected[1], computerID];
+        }
+      } else {
+        return prevSelected.filter((id) => id !== computerID);
+      }
+    });
+  };
 
   useEffect(() => {
     const getStores = async () => {
@@ -58,12 +39,61 @@ export default function CustomerPage() {
         }
     };
     getStores();
-  }, [refresh])
+  }, [computers, selectedComputers, refresh]);
 
   const compare = () => {
-    //TODO: implement
-    //refreshParent()
-  }
+    if (selectedComputers.length === 2) {
+      const computer1 = computers.find((comp) => comp.computerID === selectedComputers[0]);
+      const computer2 = computers.find((comp) => comp.computerID === selectedComputers[1]);
+  
+      const compareContainer = document.getElementById(styles.computer_compare);
+      compareContainer.innerHTML = '';
+    
+      const container1 = document.createElement('div');
+      container1.classList.add(styles.compareSpecs, styles.container);
+      container1.innerHTML = `
+        <div>
+          <h2>${computer1.computerName}</h2>
+          <h4>Price: <span style="font-weight:normal">$${computer1.price}</span></h4>
+            <li><b>Ram:</b> ${computer1.ram}</li>
+            <li><b>Storage:</b> ${computer1.storage}</li>
+            <li><b>Processor:</b> ${computer1.processor}</li>
+            <li><b>Processor Gen: </b>${computer1.processGen}</li>
+            <li><b>Graphics:</b> ${computer1.graphics}</li>
+        </div>
+      `;
+  
+      const line = document.createElement('div');
+      line.classList.add(styles.compareLine);
+  
+      const lineContainer = document.createElement('div');
+      lineContainer.appendChild(line);
+  
+      const container2 = document.createElement('div');
+      container2.classList.add(styles.compareSpecs);
+      container2.innerHTML = `
+      <div>
+      <h2>${computer2.computerName}</h2>
+      <h4>Price: <span style="font-weight:normal">$${computer2.price}</span></h4>
+        <li><b>Ram:</b> ${computer2.ram}</li>
+        <li><b>Storage:</b> ${computer2.storage}</li>
+        <li><b>Processor:</b> ${computer2.processor}</li>
+        <li><b>Processor Gen:</b> ${computer2.processGen}</li>
+        <li><b>Graphics:</b> ${computer2.graphics}</li>
+    </div>
+  `;
+  
+      compareContainer.appendChild(container1);
+      compareContainer.appendChild(lineContainer);
+      compareContainer.appendChild(container2);
+    } else {
+      alert("Please select exactly two computers for comparison.");
+    }
+  };
+  
+
+
+
 
   const filter = () => { 
     const elem = document.getElementById("StoreSelect");
@@ -181,19 +211,21 @@ export default function CustomerPage() {
           <button onClick={filter}>Filter Computers</button>
         </div>
         <div id={styles.computer_view}>
-          {computers.map((comp) => <Computer key={
-                        comp.computerID
-                    }
-                    refresh={refresh}
-                    setRefresh={setRefresh}
-                    computer_data={comp}/>)}
+        {computers.map((comp) => (
+            <div key={comp.computerID}>
+              <Computer
+                refresh={refresh}
+                setRefresh={setRefresh}
+                computer_data={comp}
+                selectedComputers={selectedComputers}
+                onRadioChange={handleRadioClick}
+              />
+            </div>
+          ))}
         </div>
         <div id={styles.compare_view}>
           <button className = {styles.compareButton} onClick={compare}>Compare Computers</button>
           <div id={styles.compare_div}>
-            <div id={styles.computer_compare}>
-
-            </div>
             <div id={styles.computer_compare}>
 
             </div>
