@@ -23,6 +23,7 @@
     width: 35%;
     min-height: 85vh; 
     background-color: #ebe9eb;
+    align-content: start;
 }
 
 label {
@@ -42,7 +43,6 @@ label {
 
 
 #computer_compare {
-    margin-top: 70px;
     padding: 20px;
     display: flex;
     text-align: left;
@@ -55,7 +55,6 @@ label {
     height: 100%;
     margin: 0 10px;
 }
-
 
 p {
     font-size: 20px;
@@ -72,9 +71,7 @@ button {
   
 
 .compareButton {
-    position: absolute;
-    top: 90px;
-    left: 950px;
+    margin-top: 30px;
     background-color: #675D83;
     width: 200px;
     height: 50px;
@@ -83,6 +80,7 @@ button {
     border-width: 0.5px;
     color: white;
     border-radius:5px;
+    margin-left: 0;
 }
 
 input[type="radio"] {

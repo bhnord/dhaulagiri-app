@@ -227,7 +227,6 @@ export default function CustomerPage() {
           <button className = {styles.compareButton} onClick={compare}>Compare Computers</button>
           <div id={styles.compare_div}>
             <div id={styles.computer_compare}>
-
             </div>
           </div>
         </div>
