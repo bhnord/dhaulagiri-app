@@ -43,16 +43,62 @@ export default function CustomerPage() {
 
   const compare = () => {
     if (selectedComputers.length === 2) {
-      // Perform visual comparison logic here
       const computer1 = computers.find((comp) => comp.computerID === selectedComputers[0]);
       const computer2 = computers.find((comp) => comp.computerID === selectedComputers[1]);
-
-      // You can use computer1 and computer2 to display the comparison
-      console.log("Visual comparison of the selected computers:", computer1, computer2);
+  
+      const compareContainer = document.getElementById(styles.computer_compare);
+      compareContainer.innerHTML = ''; // Clear previous content
+    
+      // Create a container for each computer
+      const container1 = document.createElement('div');
+      container1.classList.add(styles.compareSpecs, styles.container); // Add styles.container class
+      container1.innerHTML = `
+        <div>
+          <h2>${computer1.computerName}</h2>
+          <h4>Price: <span style="font-weight:normal">$${computer1.price}</span></h4>
+            <li><b>Ram:</b> ${computer1.ram}</li>
+            <li><b>Storage:</b> ${computer1.storage}</li>
+            <li><b>Processor:</b> ${computer1.processor}</li>
+            <li><b>Processor Gen: </b>${computer1.processGen}</li>
+            <li><b>Graphics:</b> ${computer1.graphics}</li>
+        </div>
+      `;
+  
+      // Create a line element
+      const line = document.createElement('div');
+      line.classList.add(styles.compareLine);
+  
+      // Create a container for the line
+      const lineContainer = document.createElement('div');
+      lineContainer.appendChild(line);
+  
+      // Create a container for the second computer
+      const container2 = document.createElement('div');
+      container2.classList.add(styles.compareSpecs);
+      container2.innerHTML = `
+      <div>
+      <h2>${computer2.computerName}</h2>
+      <h4>Price: <span style="font-weight:normal">$${computer2.price}</span></h4>
+        <li><b>Ram:</b> ${computer2.ram}</li>
+        <li><b>Storage:</b> ${computer2.storage}</li>
+        <li><b>Processor:</b> ${computer2.processor}</li>
+        <li><b>Processor Gen:</b> ${computer2.processGen}</li>
+        <li><b>Graphics:</b> ${computer2.graphics}</li>
+    </div>
+  `;
+  
+      // Append everything to the main container
+      compareContainer.appendChild(container1);
+      compareContainer.appendChild(lineContainer);
+      compareContainer.appendChild(container2);
     } else {
       alert("Please select exactly two computers for comparison.");
     }
-  }
+  };
+  
+
+
+
 
   const filter = () => { 
     const elem = document.getElementById("StoreSelect");
@@ -185,9 +231,6 @@ export default function CustomerPage() {
         <div id={styles.compare_view}>
           <button className = {styles.compareButton} onClick={compare}>Compare Computers</button>
           <div id={styles.compare_div}>
-            <div id={styles.computer_compare}>
-
-            </div>
             <div id={styles.computer_compare}>
 
             </div>
