@@ -13,10 +13,6 @@ export default function CustomerComputer({ computer_data, refresh, setRefresh, s
 
   const isChecked = selectedComputers.includes(computerID);
 
-  useEffect(() => {
-    onRadioChange(computerID, isChecked);
-  }, [computerID, isChecked, onRadioChange]);
-
   const handleRadioClick = () => {
     onRadioChange(computerID, !isChecked);
   };

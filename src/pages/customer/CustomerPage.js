@@ -12,54 +12,17 @@ export default function CustomerPage() {
 
   const handleRadioClick = (computerID, checked) => {
     setSelectedComputers((prevSelected) => {
-      // If checked, add the computerID to the array (max two elements)
       if (checked) {
         if (prevSelected.length < 2) {
           return [...prevSelected, computerID];
         } else {
-          // Deselect the oldest one and add the new one
           return [prevSelected[1], computerID];
         }
       } else {
-        // If unchecked, remove the computerID from the array
         return prevSelected.filter((id) => id !== computerID);
       }
     });
   };
-    
-  //will be returned from lambda
-  // const c_data = {
-  //   name: "Computer X",
-  //   ram: 12,
-  //   storage: 10,
-  //   processor: "AMD",
-  //   processor_generation: 10,
-  //   graphics: "NVDIA",
-  //   price: 1000,
-  // };
-
-  //load examples
-  // const computers = [];
-  // for (let i = 0; i < 3; i++) {
-  //   computers.push(<Computer key={i} computer_data={c_data} />);
-  // }
-
-  // useEffect(() => {
-  //   const getComputers = async () => {
-  //       const resp = await api.generateStoreInventory();
-  //       const computers = resp.computers;
-  //       // const inventory = resp ?. inventory ?. toFixed(2);
-
-  //       if (resp.statusCode !== 200) {
-  //           alert("invalid login")
-
-  //       } else {
-  //           setComputers(computers)
-  //           // setInventory(inventory)
-  //       }
-  //   };
-  //   getComputers();
-  // }, [refresh])
 
   useEffect(() => {
     const getStores = async () => {
@@ -76,11 +39,19 @@ export default function CustomerPage() {
         }
     };
     getStores();
-  }, [refresh])
+  }, [computers, selectedComputers, refresh]);
 
   const compare = () => {
-    //TODO: implement
-    //refreshParent()
+    if (selectedComputers.length === 2) {
+      // Perform visual comparison logic here
+      const computer1 = computers.find((comp) => comp.computerID === selectedComputers[0]);
+      const computer2 = computers.find((comp) => comp.computerID === selectedComputers[1]);
+
+      // You can use computer1 and computer2 to display the comparison
+      console.log("Visual comparison of the selected computers:", computer1, computer2);
+    } else {
+      alert("Please select exactly two computers for comparison.");
+    }
   }
 
   const filter = () => { 
