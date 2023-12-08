@@ -12,6 +12,11 @@ export default function CustomerComputer({computer_data, refresh, setRefresh}) {
   const refreshParent = () => {
     setRefresh(refresh + 1)
   }
+  
+  const buyComputer = () => {
+    //TODO: Implement
+    refreshParent();
+  }
 
   return (
     <div id={styles.computer}>
@@ -32,6 +37,9 @@ export default function CustomerComputer({computer_data, refresh, setRefresh}) {
         <form>
           <div id={styles.computerRadio}>
             <label><input className="Radio" type="radio" id="Compare" name="Compare" value="Compare"></input>Compare</label>
+          </div>
+          <div id={styles.buyButton}>
+            <button className={styles.buttons} onClick={buyComputer}>Buy Computer</button>
           </div>
         </form>
       </div>
