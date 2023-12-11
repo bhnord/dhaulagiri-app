@@ -49,7 +49,7 @@ export default function CustomerComputer({ computer_data, refresh, setRefresh, s
             </label>
           </div>
           <div id={styles.buyButton}>
-            <button className={styles.buttons} onClick={buyComputer}>Buy Computer</button>
+            <button className={styles.buttons} onClick={handleRadioClick}>Buy Computer</button>
           </div>
         </form>
       </div>

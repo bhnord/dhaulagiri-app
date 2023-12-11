@@ -85,7 +85,7 @@ export default function CustomerPage() {
     };
 
     getStores();
-  }, [refresh, check, computers, selectedComputers]);
+  }, [refresh, check, selectedComputers]);
 
   useEffect(() => {
     const getStores = async () => {
