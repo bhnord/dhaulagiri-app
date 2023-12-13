@@ -27,7 +27,7 @@ export default function CustomerPage() {
 
   useEffect(() => {
     const loadComputers = (s) => { 
-      console.log(s);
+      // console.log(s);
       var totalChecked = 0;
       var checkAll = false;
       for(var i = 0; i < s.length; i++){
@@ -106,11 +106,12 @@ export default function CustomerPage() {
 
   const clickStore = (store) => {
     var c = check;
-    console.log(c);
+    // console.log(c);
+    
     for(var i = 0; i < stores.length; i++){
       if(stores[i].storeName === store){
         c[i] = document.getElementById(store).checked;
-        console.log(c[i])
+        // console.log(c[i])
       }
     }
     setCheck(c);
