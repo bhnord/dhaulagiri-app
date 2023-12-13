@@ -17,7 +17,7 @@ class Api { // TODO: remove this as hard-coded values
         // TODO: add some kind of login checking through lambda
     }
 
-    generateStoreInventory(storeName = this.storeName) {
+    generateStoreInventory(storeName = this.storeName, latitude, longitude) {
         const endpoint = "generate-store-inventory";
         const requestOptions = {
             method: "POST",
@@ -25,7 +25,7 @@ class Api { // TODO: remove this as hard-coded values
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(
-                {username: this.username, password: this.password, storeName: storeName}
+                {username: this.username, password: this.password, storeName: storeName, latitude: latitude, longitude: longitude}
             )
         };
 
