@@ -28,60 +28,55 @@ export default function CustomerPage() {
     const getStores = async () => {
         const resp = await api.listStores();
         const stores = resp.stores;
-        // const inventory = resp ?. inventory ?. toFixed(2);
 
         if (resp.statusCode !== 200) {
             alert("invalid login")
 
         } else {
             setStores(stores);
-            // setInventory(inventory)
         }
     };
     getStores();
   }, [computers, selectedComputers, refresh]);
 
-  const compare = () => {
+  const compare = async () => {
     if (selectedComputers.length === 2) {
       const computer1 = computers.find((comp) => comp.computerID === selectedComputers[0]);
       const computer2 = computers.find((comp) => comp.computerID === selectedComputers[1]);
   
       const compareContainer = document.getElementById(styles.computer_compare);
       compareContainer.innerHTML = '';
-    
-      const container1 = document.createElement('div');
-      container1.classList.add(styles.compareSpecs, styles.container);
-      container1.innerHTML = `
-        <div>
-          <h2>${computer1.computerName}</h2>
-          <h4>Price: <span style="font-weight:normal">$${computer1.price}</span></h4>
-            <li><b>Ram:</b> ${computer1.ram}</li>
-            <li><b>Storage:</b> ${computer1.storage}</li>
-            <li><b>Processor:</b> ${computer1.processor}</li>
-            <li><b>Processor Gen: </b>${computer1.processGen}</li>
-            <li><b>Graphics:</b> ${computer1.graphics}</li>
-        </div>
-      `;
   
+      const createComputerContainer = async (computer) => {
+        const container = document.createElement('div');
+        container.classList.add(styles.compareSpecs, styles.container);
+  
+        const resp = await api.generateStoreInventory(computer.storeName, 100, 19.5);
+        console.log("Shipping")
+        console.log(resp)
+        const shippingPrice = resp.computers.find((comp) => comp.computerID === computer.computerID)?.shippingPrice;
+  
+        container.innerHTML = `
+          <div>
+            <h2>${computer.computerName}</h2>
+            <h4>Price: <span style="font-weight:normal">$${computer.price}</span></h4>
+            <h4>Shipping Price: <span style="font-weight:normal">$${shippingPrice.toFixed(2)}</span></h4>
+            <li><b>Ram:</b> ${computer.ram}</li>
+            <li><b>Storage:</b> ${computer.storage}</li>
+            <li><b>Processor:</b> ${computer.processor}</li>
+            <li><b>Processor Gen: </b>${computer.processGen}</li>
+            <li><b>Graphics:</b> ${computer.graphics}</li>
+          </div>
+        `;
+        return container;
+      };
+  
+      const container1 = await createComputerContainer(computer1);
       const line = document.createElement('div');
       line.classList.add(styles.compareLine);
-  
       const lineContainer = document.createElement('div');
       lineContainer.appendChild(line);
-  
-      const container2 = document.createElement('div');
-      container2.classList.add(styles.compareSpecs);
-      container2.innerHTML = `
-      <div>
-      <h2>${computer2.computerName}</h2>
-      <h4>Price: <span style="font-weight:normal">$${computer2.price}</span></h4>
-        <li><b>Ram:</b> ${computer2.ram}</li>
-        <li><b>Storage:</b> ${computer2.storage}</li>
-        <li><b>Processor:</b> ${computer2.processor}</li>
-        <li><b>Processor Gen:</b> ${computer2.processGen}</li>
-        <li><b>Graphics:</b> ${computer2.graphics}</li>
-    </div>
-  `;
+      const container2 = await createComputerContainer(computer2);
   
       compareContainer.appendChild(container1);
       compareContainer.appendChild(lineContainer);
@@ -89,9 +84,7 @@ export default function CustomerPage() {
     } else {
       alert("Please select exactly two computers for comparison.");
     }
-  };
-  
-
+  };  
 
 
 
