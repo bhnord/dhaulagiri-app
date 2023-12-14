@@ -148,6 +148,23 @@ class Api { // TODO: remove this as hard-coded values
 
         return fetch(aws_path + endpoint, requestOptions).then((response) => response.json());
     }
+
+    filterComputer(storeName, features) {
+        const endpoint = "filter-computers";
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(
+            {
+                    storeName: storeName,
+                    features: features
+            }
+            )
+        };
+        return fetch(aws_path + endpoint, requestOptions).then((response) => response.json());
+    }
 }
 
 export let api = new Api();
