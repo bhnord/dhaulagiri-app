@@ -76,7 +76,7 @@ export default function CustomerPage() {
       const stores = resp.stores;
 
       if (resp.statusCode !== 200) {
-          alert("invalid login")
+          alert("Error fetching store's list.")
 
       } else {
           setStores(stores);
@@ -167,6 +167,51 @@ export default function CustomerPage() {
   };  
 
 
+
+  const filter = () => { 
+    const elem = document.getElementById("StoreSelect");
+    const v = elem.value;
+
+    if(v !== "any"){
+      const getStoreComputers = async () => {
+          const resp = await api.generateStoreInventory(v);
+          const computers = resp.computers;
+
+          if (resp.statusCode !== 200) {
+              alert("Error generating store inventory.")
+
+          } else {
+              setComputers(computers);
+          }
+      };
+      getStoreComputers();
+    }
+
+    else {
+      var num_processed = 1;
+      for(var i = 1; i < elem.options.length; i++){
+        var computers = [];
+        const getStoreComputers = async () => {
+          const resp = await api.generateStoreInventory(elem.options[i].value);
+          const new_computers = resp.computers;
+
+          if (resp.statusCode !== 200) {
+              alert("Error generating store inventory.");
+          }
+          else{
+            computers.push(new_computers);
+            num_processed += 1;
+            if(num_processed === elem.options.length){
+              computers = computers.flat(1);
+              setComputers(computers);
+            }
+          }
+        }
+        getStoreComputers();
+      }
+    }
+    setRefresh(refresh+1);
+  }
 
   return (
     <div className={styles.wrapper}>
