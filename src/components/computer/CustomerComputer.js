@@ -48,6 +48,9 @@ export default function CustomerComputer({ computer_data, refresh, setRefresh, s
               Compare
             </label>
           </div>
+          <div id={styles.buyButton}>
+            <button className={styles.buttons} onClick={handleRadioClick}>Buy Computer</button>
+          </div>
         </form>
       </div>
     </div>
