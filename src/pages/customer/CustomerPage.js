@@ -30,7 +30,7 @@ export default function CustomerPage() {
         const stores = resp.stores;
 
         if (resp.statusCode !== 200) {
-            alert("invalid login")
+            alert("Error fetching store's list.")
 
         } else {
             setStores(stores);
@@ -98,7 +98,7 @@ export default function CustomerPage() {
           const computers = resp.computers;
 
           if (resp.statusCode !== 200) {
-              alert("invalid login")
+              alert("Error generating store inventory.")
 
           } else {
               setComputers(computers);
@@ -116,7 +116,7 @@ export default function CustomerPage() {
           const new_computers = resp.computers;
 
           if (resp.statusCode !== 200) {
-              alert("invalid login");
+              alert("Error generating store inventory.");
           }
           else{
             computers.push(new_computers);
