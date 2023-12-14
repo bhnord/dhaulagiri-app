@@ -91,3 +91,17 @@ select {
     display: flex;
     align-items:first baseline;
 }
+
+.inputBoxes {
+    width: 150px;
+    padding:5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.formRow {
+    padding-top: 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}

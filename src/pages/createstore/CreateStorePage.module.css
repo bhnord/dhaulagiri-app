@@ -1,11 +1,9 @@
-/* Example CSS for styling input elements */
-
 .inputBoxes {
     width: 200px;
     padding:10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin: 10px; /* Adjust the margin to create space around the input fields */
+    margin: 10px;
 }
 
 #topLeftLoginButton {

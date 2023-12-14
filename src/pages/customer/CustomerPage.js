@@ -9,6 +9,8 @@ export default function CustomerPage() {
   const [stores, setStores] = useState([]);
   const [refresh, setRefresh] = useState(0);
   const [selectedComputers, setSelectedComputers] = useState([]);
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
 
   const handleRadioClick = (computerID, checked) => {
     setSelectedComputers((prevSelected) => {
@@ -40,47 +42,52 @@ export default function CustomerPage() {
   }, [computers, selectedComputers, refresh]);
 
   const compare = async () => {
-    if (selectedComputers.length === 2) {
-      const computer1 = computers.find((comp) => comp.computerID === selectedComputers[0]);
-      const computer2 = computers.find((comp) => comp.computerID === selectedComputers[1]);
-  
-      const compareContainer = document.getElementById(styles.computer_compare);
-      compareContainer.innerHTML = '';
-  
-      const createComputerContainer = async (computer) => {
-        const container = document.createElement('div');
-        container.classList.add(styles.compareSpecs, styles.container);
-  
-        const resp = await api.generateStoreInventory(computer.storeName, 100, 19.5);
-        const shippingPrice = resp.computers.find((comp) => comp.computerID === computer.computerID)?.shippingPrice;
-  
-        container.innerHTML = `
-          <div>
-            <h2>${computer.computerName}</h2>
-            <h4>Price: <span style="font-weight:normal">$${computer.price}</span></h4>
-            <h4>Shipping Price: <span style="font-weight:normal">$${shippingPrice.toFixed(2)}</span></h4>
-            <li><b>Ram:</b> ${computer.ram}</li>
-            <li><b>Storage:</b> ${computer.storage}</li>
-            <li><b>Processor:</b> ${computer.processor}</li>
-            <li><b>Processor Gen: </b>${computer.processGen}</li>
-            <li><b>Graphics:</b> ${computer.graphics}</li>
-          </div>
-        `;
-        return container;
-      };
-  
-      const container1 = await createComputerContainer(computer1);
-      const line = document.createElement('div');
-      line.classList.add(styles.compareLine);
-      const lineContainer = document.createElement('div');
-      lineContainer.appendChild(line);
-      const container2 = await createComputerContainer(computer2);
-  
-      compareContainer.appendChild(container1);
-      compareContainer.appendChild(lineContainer);
-      compareContainer.appendChild(container2);
-    } else {
+    if (latitude && longitude){
+      if (selectedComputers.length === 2) {
+        const computer1 = computers.find((comp) => comp.computerID === selectedComputers[0]);
+        const computer2 = computers.find((comp) => comp.computerID === selectedComputers[1]);
+    
+        const compareContainer = document.getElementById(styles.computer_compare);
+        compareContainer.innerHTML = '';
+    
+        const createComputerContainer = async (computer) => {
+          const container = document.createElement('div');
+          container.classList.add(styles.compareSpecs, styles.container);
+    
+          const resp = await api.generateStoreInventory(computer.storeName, latitude, longitude);
+          const shippingPrice = resp.computers.find((comp) => comp.computerID === computer.computerID)?.shippingPrice;
+    
+          container.innerHTML = `
+            <div>
+              <h2>${computer.computerName}</h2>
+              <h4>Price: <span style="font-weight:normal">$${computer.price}</span></h4>
+              <h4>Shipping Price: <span style="font-weight:normal">$${shippingPrice.toFixed(2)}</span></h4>
+              <li><b>Ram:</b> ${computer.ram}</li>
+              <li><b>Storage:</b> ${computer.storage}</li>
+              <li><b>Processor:</b> ${computer.processor}</li>
+              <li><b>Processor Gen: </b>${computer.processGen}</li>
+              <li><b>Graphics:</b> ${computer.graphics}</li>
+            </div>
+          `;
+          return container;
+        };
+    
+        const container1 = await createComputerContainer(computer1);
+        const line = document.createElement('div');
+        line.classList.add(styles.compareLine);
+        const lineContainer = document.createElement('div');
+        lineContainer.appendChild(line);
+        const container2 = await createComputerContainer(computer2);
+    
+        compareContainer.appendChild(container1);
+        compareContainer.appendChild(lineContainer);
+        compareContainer.appendChild(container2);
+    }
+    else {
       alert("Please select exactly two computers for comparison.");
+    }
+    } else {
+      alert("Please input a valid latitude and longitude.");
     }
   };
 
@@ -335,6 +342,16 @@ useEffect(() => {
           ))}
         </div>
         <div id={styles.compare_view}>
+        <form className={styles.formRow}>
+        <div>
+            <label>Latitude: </label>
+            <input id="lat" type="number" className={styles.inputBoxes} value={latitude} onChange={(e) => setLatitude(e.target.value)} />
+        </div>
+        <div>
+            <label>Longitude: </label>
+            <input id="long" type="number" className={styles.inputBoxes} value={longitude} onChange={(e) => setLongitude(e.target.value)} />
+        </div>
+        </form>
           <button className = {styles.compareButton} onClick={compare}>Compare Computers</button>
           <div id={styles.compare_div}>
             <div id={styles.computer_compare}>
