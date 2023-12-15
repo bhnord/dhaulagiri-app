@@ -54,9 +54,9 @@ export default function SiteManagerPage() {
         <div id={styles.store_view}>
           <p>Total Inventory $ Amount: ${totalInventory}</p>
           <p>Site Balance: ${siteBalance}</p>
-          <p>Generate Site Reports:</p>
+          {/* <p>Generate Site Reports:</p>
           <button className={styles.buttons}>Internal Profit Report</button>
-          <button className={styles.buttons}>Total Inventory Report</button>
+          <button className={styles.buttons}>Total Inventory Report</button> */}
         </div>
       </div>
     </div>

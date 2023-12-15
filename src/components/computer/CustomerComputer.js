@@ -1,7 +1,7 @@
 import styles from './Computer.module.css';
 import React, { useEffect } from 'react';
 
-export default function CustomerComputer({ computer_data, refresh, setRefresh, selectedComputers, onRadioChange }) {
+export default function CustomerComputer({ computer_data, refresh, setRefresh, selectedComputers, onRadioChange, buyComp }) {
   const computerID = computer_data.computerID;
   const name = computer_data.computerName;
   const ram = computer_data.ram;
@@ -15,6 +15,12 @@ export default function CustomerComputer({ computer_data, refresh, setRefresh, s
 
   const handleRadioClick = () => {
     onRadioChange(computerID, !isChecked);
+  };
+
+  const buyComputer = () => {
+    console.log("test0");
+    buyComp(computerID);
+    console.log("test4");
   };
 
   return (
@@ -46,10 +52,10 @@ export default function CustomerComputer({ computer_data, refresh, setRefresh, s
                 onChange={handleRadioClick}
               />
               Compare
-            </label>
+            </label>  
           </div>
           <div id={styles.buyButton}>
-            <button className={styles.buttons} onClick={handleRadioClick}>Buy Computer</button>
+            <button className={styles.buttons} onClick={buyComputer} >Buy Computer</button>
           </div>
         </form>
       </div>

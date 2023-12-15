@@ -82,10 +82,10 @@ export default function CustomerPage() {
         compareContainer.appendChild(container1);
         compareContainer.appendChild(lineContainer);
         compareContainer.appendChild(container2);
-    }
-    else {
-      alert("Please select exactly two computers for comparison.");
-    }
+      }
+      else {
+        alert("Please select exactly two computers for comparison.");
+      }
     } else {
       alert("Please input a valid latitude and longitude.");
     }
@@ -152,6 +152,26 @@ export default function CustomerPage() {
     setRefresh(refresh + 1);
   };
   
+const buyComputer = (compID) => {
+  console.log("test1");
+  if (latitude && longitude){
+    const buyComp = async () => {
+      console.log("test2");
+      const resp = await api.buyComputer(compID, latitude, longitude);
+      if(resp.statusCode !== 200){
+        console.log("test3");
+        alert("An error occured while attempting to buy the computer");
+        console.log("An error occured: " + resp);
+      }
+      else{
+        setRefresh(refresh+1)
+      }
+    };
+    buyComp();
+  } else {
+   alert("Please input a valid latitude and longitude in order to buy a computer.");
+  }
+}
 
 const collectSelectedFeatures = () => {
   const features = [];
@@ -250,7 +270,7 @@ useEffect(() => {
   };
 
   getStoresAndComputers();
-}, []);
+}, [refresh]);
 
 
   return (
@@ -337,6 +357,7 @@ useEffect(() => {
                 computer_data={comp}
                 selectedComputers={selectedComputers}
                 onRadioChange={handleRadioClick}
+                buyComp={buyComputer}
               />
             </div>
           ))}

@@ -69,7 +69,7 @@ export default function StoreOwnerPage() {
             }>
                 <p>Total Store Balance: ${storeBalance}</p>
                 <p>Total Inventory $ Amount: ${inventory}</p>
-                <button>Inventory Report</button>
+                {/* <button>Inventory Report</button> */}
                 <div className="addComputer">
                     <p>Add A Computer</p>
                     <input id="name" type="text" placeholder="Name"/>

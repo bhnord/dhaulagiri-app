@@ -165,6 +165,26 @@ class Api { // TODO: remove this as hard-coded values
         };
         return fetch(aws_path + endpoint, requestOptions).then((response) => response.json());
     }
+
+    buyComputer(computerID, latitude, longitude) {
+        const endpoint = "buy-computer";
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(
+            {
+                    computerID: computerID,
+                    latitude: latitude,
+                    longitude: longitude
+            }
+            )
+        };
+
+        return fetch(aws_path + endpoint, requestOptions).then((response) => response.json());
+    }
+
 }
 
 export let api = new Api();
