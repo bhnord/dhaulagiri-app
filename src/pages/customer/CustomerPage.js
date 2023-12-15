@@ -8,6 +8,7 @@ export default function CustomerPage() {
   const [computers, setComputers] = useState([]);
   const [stores, setStores] = useState([]);
   const [refresh, setRefresh] = useState(0);
+  const [fullRefresh, setFullRefresh] = useState(0);
   const [selectedComputers, setSelectedComputers] = useState([]);
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
@@ -39,7 +40,7 @@ export default function CustomerPage() {
         }
     };
     getStores();
-  }, [computers, selectedComputers, refresh]);
+  }, [computers, fullRefresh, selectedComputers, refresh]);
 
   const compare = async () => {
     if (latitude && longitude){
@@ -153,18 +154,16 @@ export default function CustomerPage() {
   };
   
 const buyComputer = (compID) => {
-  console.log("test1");
   if (latitude && longitude){
     const buyComp = async () => {
-      console.log("test2");
       const resp = await api.buyComputer(compID, latitude, longitude);
       if(resp.statusCode !== 200){
-        console.log("test3");
         alert("An error occured while attempting to buy the computer");
-        console.log("An error occured: " + resp);
+        console.log("An error occured: " + resp.statusCode);
+        setFullRefresh(fullRefresh+1);
       }
       else{
-        setRefresh(refresh+1)
+        setFullRefresh(fullRefresh+1);
       }
     };
     buyComp();
@@ -270,7 +269,7 @@ useEffect(() => {
   };
 
   getStoresAndComputers();
-}, [refresh]);
+}, [fullRefresh]);
 
 
   return (

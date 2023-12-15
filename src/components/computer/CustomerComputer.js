@@ -18,9 +18,7 @@ export default function CustomerComputer({ computer_data, refresh, setRefresh, s
   };
 
   const buyComputer = () => {
-    console.log("test0");
     buyComp(computerID);
-    console.log("test4");
   };
 
   return (
