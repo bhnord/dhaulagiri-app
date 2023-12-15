@@ -8,6 +8,7 @@ export default function CustomerPage() {
   const [computers, setComputers] = useState([]);
   const [stores, setStores] = useState([]);
   const [refresh, setRefresh] = useState(0);
+  const [fullRefresh, setFullRefresh] = useState(0);
   const [selectedComputers, setSelectedComputers] = useState([]);
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
@@ -39,7 +40,7 @@ export default function CustomerPage() {
       }
     };
     getStores();
-  }, [computers, selectedComputers, refresh]);
+  }, [computers, fullRefresh, selectedComputers, refresh]);
 
   const compare = async () => {
     if (latitude && longitude) {
@@ -173,6 +174,24 @@ export default function CustomerPage() {
     setRefresh(refresh + 1);
   };
   
+const buyComputer = (compID) => {
+  if (latitude && longitude){
+    const buyComp = async () => {
+      const resp = await api.buyComputer(compID, latitude, longitude);
+      if(resp.statusCode !== 200){
+        alert("An error occured while attempting to buy the computer");
+        console.log("An error occured: " + resp.statusCode);
+        setFullRefresh(fullRefresh+1);
+      }
+      else{
+        setFullRefresh(fullRefresh+1);
+      }
+    };
+    buyComp();
+  } else {
+   alert("Please input a valid latitude and longitude in order to buy a computer.");
+  }
+}
 
 const collectSelectedFeatures = () => {
   const features = [];
@@ -271,7 +290,7 @@ useEffect(() => {
   };
 
   getStoresAndComputers();
-}, []);
+}, [fullRefresh]);
 
 
   return (
@@ -358,6 +377,7 @@ useEffect(() => {
                 computer_data={comp}
                 selectedComputers={selectedComputers}
                 onRadioChange={handleRadioClick}
+                buyComp={buyComputer}
               />
             </div>
           ))}

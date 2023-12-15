@@ -29,7 +29,7 @@ export default function Store({store_data, refresh, setRefresh}) {
         </div>
       </div>
       <div id={styles.companyButtons}>
-        <button className={styles.buttons}>Inventory Report</button>
+        {/* <button className={styles.buttons}>Inventory Report</button> */}
         <button className={styles.buttons} onClick={removeStore}>Delete Store</button>
       </div>
     </div>

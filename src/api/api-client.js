@@ -209,6 +209,42 @@ class Api {
 
 
 
+    filterComputer(storeName, features) {
+        const endpoint = "filter-computers";
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(
+            {
+                    storeName: storeName,
+                    features: features
+            }
+            )
+        };
+        return fetch(aws_path + endpoint, requestOptions).then((response) => response.json());
+    }
+
+    buyComputer(computerID, latitude, longitude) {
+        const endpoint = "buy-computer";
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(
+            {
+                    computerID: computerID,
+                    latitude: latitude,
+                    longitude: longitude
+            }
+            )
+        };
+
+        return fetch(aws_path + endpoint, requestOptions).then((response) => response.json());
+    }
+
 }
 
 export let api = new Api();
