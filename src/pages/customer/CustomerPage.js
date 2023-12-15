@@ -12,6 +12,7 @@ export default function CustomerPage() {
   const [selectedComputers, setSelectedComputers] = useState([]);
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
+  const [isComparing, setIsComparing] = useState(false);
 
   const handleRadioClick = (computerID, checked) => {
     setSelectedComputers((prevSelected) => {
@@ -29,63 +30,83 @@ export default function CustomerPage() {
 
   useEffect(() => {
     const getStores = async () => {
-        const resp = await api.listStores();
-        const stores = resp.stores;
+      const resp = await api.listStores();
+      const stores = resp.stores;
 
-        if (resp.statusCode !== 200) {
-            alert("Error fetching store's list.")
-
-        } else {
-            setStores(stores);
-        }
+      if (resp.statusCode !== 200) {
+        alert("Error fetching store's list.");
+      } else {
+        setStores(stores);
+      }
     };
     getStores();
   }, [computers, fullRefresh, selectedComputers, refresh]);
 
   const compare = async () => {
-    if (latitude && longitude){
-      if (selectedComputers.length === 2) {
-        const computer1 = computers.find((comp) => comp.computerID === selectedComputers[0]);
-        const computer2 = computers.find((comp) => comp.computerID === selectedComputers[1]);
-    
-        const compareContainer = document.getElementById(styles.computer_compare);
-        compareContainer.innerHTML = '';
-    
-        const createComputerContainer = async (computer) => {
-          const container = document.createElement('div');
-          container.classList.add(styles.compareSpecs, styles.container);
-    
-          const resp = await api.generateStoreInventory(computer.storeName, latitude, longitude);
-          const shippingPrice = resp.computers.find((comp) => comp.computerID === computer.computerID)?.shippingPrice;
-    
-          container.innerHTML = `
-            <div>
-              <h2>${computer.computerName}</h2>
-              <h4>Price: <span style="font-weight:normal">$${computer.price}</span></h4>
-              <h4>Shipping Price: <span style="font-weight:normal">$${shippingPrice.toFixed(2)}</span></h4>
-              <li><b>Ram:</b> ${computer.ram}</li>
-              <li><b>Storage:</b> ${computer.storage}</li>
-              <li><b>Processor:</b> ${computer.processor}</li>
-              <li><b>Processor Gen: </b>${computer.processGen}</li>
-              <li><b>Graphics:</b> ${computer.graphics}</li>
-            </div>
-          `;
-          return container;
-        };
-    
-        const container1 = await createComputerContainer(computer1);
-        const line = document.createElement('div');
-        line.classList.add(styles.compareLine);
-        const lineContainer = document.createElement('div');
-        lineContainer.appendChild(line);
-        const container2 = await createComputerContainer(computer2);
-    
-        compareContainer.appendChild(container1);
-        compareContainer.appendChild(lineContainer);
-        compareContainer.appendChild(container2);
-      }
-      else {
-        alert("Please select exactly two computers for comparison.");
+    if (latitude && longitude) {
+      const compareContainer = document.getElementById(styles.computer_compare);
+      if (isComparing) {
+        compareContainer.innerHTML = "";
+        setSelectedComputers([]);
+        setIsComparing(false);
+      } else {
+        if (selectedComputers.length === 2) {
+          const computer1 = computers.find(
+            (comp) => comp.computerID === selectedComputers[0]
+          );
+          const computer2 = computers.find(
+            (comp) => comp.computerID === selectedComputers[1]
+          );
+
+          const compareContainer = document.getElementById(
+            styles.computer_compare
+          );
+          compareContainer.innerHTML = "";
+
+          const createComputerContainer = async (computer) => {
+            const container = document.createElement("div");
+            container.classList.add(styles.compareSpecs, styles.container);
+
+            const resp = await api.generateStoreInventory(
+              computer.storeName,
+              latitude,
+              longitude
+            );
+            const shippingPrice = resp.computers.find(
+              (comp) => comp.computerID === computer.computerID
+            )?.shippingPrice;
+
+            container.innerHTML = `
+              <div>
+                <h2>${computer.computerName}</h2>
+                <h4>Price: <span style="font-weight:normal">$${computer.price}</span></h4>
+                <h4>Shipping Price: <span style="font-weight:normal">$${shippingPrice.toFixed(
+                  2
+                )}</span></h4>
+                <li><b>Ram:</b> ${computer.ram}</li>
+                <li><b>Storage:</b> ${computer.storage}</li>
+                <li><b>Processor:</b> ${computer.processor}</li>
+                <li><b>Processor Gen: </b>${computer.processGen}</li>
+                <li><b>Graphics:</b> ${computer.graphics}</li>
+              </div>
+            `;
+            return container;
+          };
+
+          const container1 = await createComputerContainer(computer1);
+          const line = document.createElement("div");
+          line.classList.add(styles.compareLine);
+          const lineContainer = document.createElement("div");
+          lineContainer.appendChild(line);
+          const container2 = await createComputerContainer(computer2);
+
+          compareContainer.appendChild(container1);
+          compareContainer.appendChild(lineContainer);
+          compareContainer.appendChild(container2);
+          setIsComparing(true);
+        } else {
+          alert("Please select exactly two computers for comparison.");
+        }
       }
     } else {
       alert("Please input a valid latitude and longitude.");
@@ -372,7 +393,9 @@ useEffect(() => {
             <input id="long" type="number" className={styles.inputBoxes} value={longitude} onChange={(e) => setLongitude(e.target.value)} />
         </div>
         </form>
-          <button className = {styles.compareButton} onClick={compare}>Compare Computers</button>
+        <button className={styles.compareButton} onClick={compare}>
+            {isComparing ? "Exit Compare" : "Compare Computers"}
+          </button>          
           <div id={styles.compare_div}>
             <div id={styles.computer_compare}>
             </div>

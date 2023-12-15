@@ -15,10 +15,21 @@ export default function Computer({computer_data, refresh, setRefresh}) {
         setRefresh(refresh + 1)
     }
 
-    const adjustPrice = () => {
-      //TODO: implement
-      //refreshParent()
+    const adjustPrice = async() => {
+        let newPrice = prompt("Enter new price for \"" + name + "\"")
+        newPrice = parseFloat(newPrice).toFixed(2)
+
+        //if not a valid number, exit
+        if(isNaN(newPrice)){
+            alert("invalid input")
+            return
+        }
+
+        await api.modifyPricing(computerID, newPrice)
+        refreshParent()
     }
+
+
     const remove = async() => {
         const resp = await api.removeComputer(computerID);
         if(resp.statusCode !== 200){
