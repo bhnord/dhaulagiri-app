@@ -9,19 +9,22 @@ export default function StoreOwnerPage() {
 
   // XXX: UPDATE LAMBDA
   // will be returned from lambda
-  const storeBalance = null;
+  const [storeBalance, setStoreBalance] = useState(null);
 
   useEffect(() => {
     const getComputers = async () => {
       const resp = await api.generateStoreInventory();
       const computers = resp.computers;
       const inventory = resp?.inventory?.toFixed(2);
+      const balance = resp.balance
+      console.log(resp)
 
       if (resp.statusCode !== 200) {
         alert("invalid login");
       } else {
         setComputers(computers);
         setInventory(inventory);
+        setStoreBalance(balance)
       }
     };
     getComputers();
