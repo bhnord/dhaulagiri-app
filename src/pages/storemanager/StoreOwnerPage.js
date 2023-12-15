@@ -17,7 +17,6 @@ export default function StoreOwnerPage() {
       const computers = resp.computers;
       const inventory = resp?.inventory?.toFixed(2);
       const balance = resp.balance
-      console.log(resp)
 
       if (resp.statusCode !== 200) {
         alert("invalid login");
